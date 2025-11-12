@@ -145,3 +145,111 @@ nav ul li a {
 nav ul li a:hover {
     color: #AAAAAA; 
 }
+
+/* --- İLETİŞİM SAYFASI STİLLERİ --- */
+
+#iletisim-formu {
+    width: 90%;
+    max-width: 600px; /* Form alanını sınırla */
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #1a1a1a; /* Form kutusuna koyu arka plan */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+#iletisim-formu h2 {
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #FFFFFF;
+}
+
+.form-grup {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-grup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-grup input[type="text"],
+.form-grup input[type="email"],
+.form-grup textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    background-color: #000000; /* Giriş alanları siyah olsun */
+    color: #FFFFFF; /* Yazı rengi beyaz olsun */
+    box-sizing: border-box; /* Padding ve border'ı genişliğe dahil et */
+}
+
+.form-grup textarea {
+    resize: vertical; /* Sadece dikey olarak boyutlandırmaya izin ver */
+}
+
+#iletisim-formu button[type="submit"] {
+    width: 100%;
+    background-color: #FFFFFF;
+    color: #000000;
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+#iletisim-formu button[type="submit"]:hover {
+    background-color: #CCCCCC;
+}
+
+/* --- HAKKIMIZDA SAYFASI STİLLERİ --- */
+
+#hakkimizda-icerik {
+    width: 80%;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    text-align: center;
+}
+
+#hakkimizda-icerik p {
+    line-height: 1.8; /* Okunurluğu artırmak için satır aralığı */
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    color: #CCCCCC;
+}
+
+.giris-paragrafi {
+    font-style: italic;
+    font-size: 1.2em !important;
+    margin-bottom: 40px !important;
+}
+
+.vizyon-misyon {
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    margin: 50px 0;
+}
+
+.vizyon, .misyon {
+    flex-basis: 45%; /* Yan yana durmaları için alanın %45'ini kapla */
+    padding: 20px;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    background-color: #111111;
+}
+
+.vizyon h3, .misyon h3 {
+    color: #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
