@@ -295,74 +295,93 @@ nav ul li a:hover {
 }
 
 /* ======================================= */
-/* --- MOBİL UYUM (RESPONSIVE) STİLLERİ --- */
+/* --- GÜNCELLENMİŞ MOBİL UYUM STİLLERİ --- */
 /* ======================================= */
 
 @media (max-width: 768px) {
     
-    /* Başlık (Header) İsim Alanı */
+    /* Başlık (Header) ve İsim Alanı */
+    header {
+        padding: 20px 10px 10px 10px; /* Daha az dikey boşluk */
+    }
+
     header h1 {
-        font-size: 1.8em;
-        letter-spacing: 5px; /* Harf aralığını daralt */
+        font-size: 1.5em; /* İsim daha küçük */
+        letter-spacing: 5px;
     }
 
-    /* Arama Çubuğu */
+    /* Arama Çubuğunu Header'a sabitle */
     #arama-cubugu {
-        width: 90%; /* Daha fazla yer kaplasın */
-        max-width: none;
+        width: 90%; 
+        margin: 10px auto 20px auto; /* Daha az üst boşluk */
     }
 
-    /* Menü (Footer Navigasyonu) */
-    footer nav ul {
-        flex-direction: column; /* Menü öğelerini yan yana değil, alt alta sırala */
-        gap: 10px; /* Menü öğeleri arasındaki boşluğu azalt */
-        padding: 10px 0;
+    /* Ana İçerik (Main) Alanı */
+    main {
+        padding: 0 10px; /* Yanlardan hafif boşluk */
     }
 
     /* --- ÜRÜN VE SLIDER ALANLARI --- */
     
     #slider-alan {
-        margin: 20px auto;
+        margin: 15px auto;
     }
-
-    /* Ürün Kartları (Grid) */
+    
+    /* Ürün Kartlarını Tek Sütuna Çevir ve Ortala */
     .urun-grid {
-        flex-direction: column; /* Ürünleri yan yana değil, tek sütun halinde alt alta sırala */
+        flex-direction: column;
         gap: 20px;
-        width: 90%;
-        margin: 0 auto;
+        width: 100%;
     }
     
     .urun-kart {
-        width: 100%; /* Tüm genişliği kapla */
-        max-width: 350px; /* Maksimum genişliğini sınırla */
+        width: 95%; /* Yanlara neredeyse tam yapışsın */
+        max-width: 400px;
         margin: 0 auto;
     }
     
-    /* --- İLETİŞİM SAYFASI FORMU --- */
-    #iletisim-formu {
-        width: 90%;
-        padding: 20px;
+    /* --- MENÜ (FOOTER) --- */
+    footer {
+        flex-direction: column; 
+        padding: 15px 0 10px 0;
     }
     
-    /* --- HAKKIMIZDA SAYFASI --- */
-    .vizyon-misyon {
-        flex-direction: column; /* Vizyon ve Misyon kutularını alt alta sırala */
+    footer nav ul {
+        flex-direction: column;
+        gap: 8px; /* Menü öğeleri arasında az boşluk */
+        font-size: 0.9em;
+    }
+
+    /* --- DETAY VE İLETİŞİM SAYFALARI --- */
+    
+    /* Ürün Detay Sayfası Alt Alta */
+    #urun-detay-alani {
+        flex-direction: column;
+        padding: 20px 0;
         gap: 20px;
     }
-
-    /* --- ÜRÜN DETAY SAYFASI --- */
-    #urun-detay-alani {
-        flex-direction: column; /* Görsel ve bilgiyi alt alta sırala */
-        padding: 20px;
-        gap: 30px;
-    }
-
+    
     .detay-bilgi h2 {
-        font-size: 2em;
-    }
-
-    .detay-fiyat {
         font-size: 1.8em;
     }
+    
+    /* Hakkımızda Sayfası Alt Alta */
+    .vizyon-misyon {
+        flex-direction: column; 
+        gap: 20px;
+    }
 }
+
+/* Telefonlar için ekstra dar ayar (Örn: 480px altı) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.3em;
+        letter-spacing: 4px;
+    }
+    
+    /* Arama kutusu padding'i küçült */
+    #arama-kutusu, #arama-butonu {
+        padding: 8px 12px;
+    }
+}
+
