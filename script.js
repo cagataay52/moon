@@ -13,10 +13,10 @@ const degisimSuresi = 3000; // Görsel değişim süresi (3000 milisaniye = 3 sa
 function gorseliDegistir() {
     // Mevcut görselin kaynak (src) özelliğini güncelliyoruz
     gorselElementi.src = gorseller[mevcutIndex];
-    
+
     // Bir sonraki görsele geçmek için index'i artır
     mevcutIndex++;
-    
+
     // Eğer index listenin sonuna geldiyse, başa dön (sonsuz döngü)
     if (mevcutIndex >= gorseller.length) {
         mevcutIndex = 0;
@@ -83,13 +83,12 @@ function guncelSepetiGoster() {
 }
 
 // Yeni ve daha güçlü düğme dinleyici ekleme mekanizması
-// Bu kod, sayfa tamamen yüklendiğinde çalışır ve düğmeleri bulmayı garanti eder.
+// BU BÖLÜM YENİ HTML/CSS TASARIMINA GÖRE GÜNCELLENMİŞTİR
 document.addEventListener('DOMContentLoaded', () => {
-    // Sayfadaki tüm "Sepete Ekle" düğmelerini seç
-    // Bu selector, hem index.html hem de projeler.html'deki tüm düğmeleri kapsar
-    const sepeteEkleDugmeleri = document.querySelectorAll('.urun-kart button');
+    // Sayfadaki tüm HIZLI EKLE (+) düğmelerini seç (yeni tasarıma göre)
+    const sepeteEkleDugmeleri = document.querySelectorAll('.urun-kart .hizli-ekle');
 
-    console.log(`Sayfada bulunan sepete ekle düğmesi sayısı: ${sepeteEkleDugmeleri.length}`); // Kaç düğme bulduğunu konsola yazdırır
+    console.log(`Sayfada bulunan hızlı ekle düğmesi sayısı: ${sepeteEkleDugmeleri.length}`); 
 
     sepeteEkleDugmeleri.forEach(button => {
         // Düğme tıklandığında ne yapılacağını tanımla
@@ -97,15 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Tıklanan düğmenin ait olduğu ürün kartını bul
             const urunKart = event.target.closest('.urun-kart');
-            
-            // Ürün bilgilerini HTML yapısından çek
-            const urunAdiElementi = urunKart.querySelector('h3');
-            const urunFiyatiElementi = urunKart.querySelector('.fiyat');
+
+            // Ürün bilgilerini HTML yapısından çek (YENİ SEÇİCİLER KULLANILARAK)
+            // Ürün adı artık .urun-isim sınıfına sahip p etiketi içinde
+            const urunAdiElementi = urunKart.querySelector('.urun-bilgileri .urun-isim');
+            // Fiyat seçicisi
+            const urunFiyatiElementi = urunKart.querySelector('.urun-bilgileri .fiyat'); 
 
             // Metin değerlerini al
             const urunAdi = urunAdiElementi ? urunAdiElementi.textContent.trim() : 'Bilinmeyen Ürün';
             let urunFiyatiMetin = urunFiyatiElementi ? urunFiyatiElementi.textContent.trim() : '0 TL';
-            
+
             // Fiyat metnini sayıya çevir (Örn: "199,90 TL" -> 199.90)
             urunFiyatiMetin = urunFiyatiMetin.replace(' TL', '').replace(',', '.');
             const urunFiyati = parseFloat(urunFiyatiMetin);
@@ -116,6 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 alert('Hata: Ürün fiyatı belirlenemedi.');
             }
+            
+            // (+) butonuna tıklandığında linkin çalışmasını engelle (önemli)
+            event.preventDefault();
         });
     });
 });
