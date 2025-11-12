@@ -1,0 +1,60 @@
+/* Genel Ayarlar ve Sıfırlamalar */
+body {
+    /* Arka planı siyah, yazıyı beyaz yaptık (Beyaz bir arka plan da deneyebiliriz!) */
+    background-color: #000000; /* Siyah Arka Plan */
+    color: #FFFFFF; /* Beyaz Yazı Rengi */
+    font-family: Arial, sans-serif; /* Okunabilir bir yazı tipi */
+    margin: 0; /* Sayfanın kenar boşluklarını sıfırladık */
+    padding: 0;
+    min-height: 100vh; /* Sayfanın en az tam ekran yüksekliğinde olmasını sağladık */
+    display: flex;
+    flex-direction: column; /* İçerikleri dikey olarak düzenle */
+    text-align: center; /* Tüm içeriği ortala */
+}
+
+/* 1. Üst Bölüm: İsim (M O O N) */
+header {
+    padding: 30px 0;
+    font-size: 2em; /* Yazıyı büyüttük */
+    letter-spacing: 5px; /* Harfler arasına boşluk koyarak şık bir görünüm verdik */
+}
+
+/* 2. Ana İçerik Alanı */
+main {
+    flex-grow: 1; /* Ortadaki içeriğin kalan tüm alanı kaplamasını sağladık */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 3. Alt Bölüm: Menü Sekmeleri */
+footer {
+    width: 100%;
+    padding: 20px 0;
+    /* Menüye ince bir beyaz çizgi ekledik */
+    border-top: 1px solid #FFFFFF; 
+}
+
+/* Menü listesi ayarları */
+nav ul {
+    list-style: none; /* Noktaları kaldırdık */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Menü öğelerini yan yana dizdik */
+    justify-content: center; /* Menü öğelerini ortaladık */
+    gap: 40px; /* Menü öğeleri arasına boşluk koyduk */
+}
+
+/* Menü bağlantıları (linkler) */
+nav ul li a {
+    color: #FFFFFF; /* Bağlantı yazı rengini beyaz yaptık */
+    text-decoration: none; /* Alt çizgiyi kaldırdık */
+    font-weight: bold;
+    transition: color 0.3s; /* Renk değişimine yumuşak bir geçiş ekledik */
+}
+
+/* Fare menünün üzerine gelince rengi değiştir */
+nav ul li a:hover {
+    color: #AAAAAA; /* Üzerine gelince biraz griye döner */
+}
