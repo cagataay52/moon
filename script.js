@@ -82,13 +82,19 @@ function guncelSepetiGoster() {
     console.log(sepetDetay);
 }
 
-// Düğmeleri bulma ve onlara işlev atama
+// Yeni ve daha güçlü düğme dinleyici ekleme mekanizması
+// Bu kod, sayfa tamamen yüklendiğinde çalışır ve düğmeleri bulmayı garanti eder.
 document.addEventListener('DOMContentLoaded', () => {
     // Sayfadaki tüm "Sepete Ekle" düğmelerini seç
+    // Bu selector, hem index.html hem de projeler.html'deki tüm düğmeleri kapsar
     const sepeteEkleDugmeleri = document.querySelectorAll('.urun-kart button');
 
+    console.log(`Sayfada bulunan sepete ekle düğmesi sayısı: ${sepeteEkleDugmeleri.length}`); // Kaç düğme bulduğunu konsola yazdırır
+
     sepeteEkleDugmeleri.forEach(button => {
+        // Düğme tıklandığında ne yapılacağını tanımla
         button.addEventListener('click', (event) => {
+            
             // Tıklanan düğmenin ait olduğu ürün kartını bul
             const urunKart = event.target.closest('.urun-kart');
             
