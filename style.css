@@ -253,3 +253,43 @@ nav ul li a:hover {
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
+
+/* --- ARAMA ÇUBUĞU STİLLERİ --- */
+
+#arama-cubugu {
+    width: 100%;
+    max-width: 500px; /* Arama çubuğunun genişliğini sınırla */
+    margin: 15px auto 30px auto; /* Üstte ve altta boşluk bırak */
+    display: flex; /* İçindeki kutu ve düğmeyi yan yana diz */
+    justify-content: center;
+}
+
+#arama-kutusu {
+    padding: 10px 15px;
+    width: 70%;
+    border: 1px solid #555555;
+    border-right: none; /* Butonla birleşmesi için sağ çizgiyi kaldır */
+    border-radius: 4px 0 0 4px; /* Sadece soldan yuvarla */
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 1em;
+}
+
+#arama-kutusu::placeholder {
+    color: #888888;
+}
+
+#arama-butonu {
+    padding: 10px 15px;
+    border: 1px solid #FFFFFF;
+    border-radius: 0 4px 4px 0; /* Sadece sağdan yuvarla */
+    background-color: #FFFFFF;
+    color: #000000;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#arama-butonu:hover {
+    background-color: #CCCCCC;
+}
