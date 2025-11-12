@@ -1,387 +1,141 @@
-/* Genel Ayarlar ve Sıfırlamalar */
-body {
-    /* Siyah Arka Plan, Beyaz Yazı */
-    background-color: #000000; 
-    color: #FFFFFF; 
-    font-family: Arial, sans-serif; 
-    margin: 0; 
-    padding: 0;
-    min-height: 100vh; 
-    display: flex;
-    flex-direction: column; /* İçeriği dikey sırala (ÖNEMLİ DÜZELTME) */
-    text-align: center; 
-}
-
-/* 1. Üst Bölüm: İsim (M O O N) */
-header {
-    padding: 30px 0;
-    font-size: 2em; 
-    letter-spacing: 10px; /* Harf aralığını biraz daha açtık */
-}
-
-/* Ana İçerik Alanı - Düzenleme */
-main {
-    flex-grow: 1; 
-    /* Ana içeriğin kendi içinde dikey akmasını sağla */
-    display: flex;
-    flex-direction: column; 
-    align-items: center; /* İçerikleri yatayda ortala */
-    width: 100%;
-}
-
-/* --- 1. SLIDER ALANI STİLİ --- */
-#slider-alan {
-    width: 90%; /* Kutu içeriğini ortalamak için genişlik */
-    max-width: 1200px; 
-    margin: 40px auto 60px auto; /* Üst ve alt boşluk ekledik */
-    text-align: center;
-}
-
-#slider-alan h2 {
-    margin-bottom: 25px;
-    font-size: 1.8em;
-}
-
-#reklam-gorseli {
-    width: 100%;
-    height: auto;
-    max-height: 450px; 
-    object-fit: cover; 
-    border: 3px solid #FFFFFF; 
-    display: block; /* Görselin kapladığı alanı netleştirir */
-}
-
-/* --- 2. ÜRÜNLER ALANI STİLİ --- */
-#urunler-alan {
-    width: 90%;
-    max-width: 1200px;
-    margin: 50px auto;
-    padding-bottom: 50px; /* Alt boşluk */
-    text-align: center;
-}
+/* --- 2. ÜRÜNLER ALANI STİLİ (YENİ TASARIM) --- */
 
 #urunler-alan h2 {
+    /* Başlık stili, sitenin genel stilini korur */
     margin-bottom: 40px;
     font-size: 2em;
 }
 
-/* Ürün kartlarını düzenleme */
+/* Ürün Grid Düzeni: 2 Sütunlu Yapı */
 .urun-grid {
     display: flex;
+    flex-wrap: wrap; /* Öğeler sığmayınca alt satıra geçsin */
+    gap: 15px; /* Ürünler arasındaki boşluk */
     justify-content: center; /* Kartları ortaya topla */
-    gap: 30px; 
-    flex-wrap: wrap; 
+    /* Beyaz arka planın üzerinde siyah yazı odaklı olduğu için,
+       ürün ızgarasının kapsayıcısının arka planını saydam bırakalım, 
+       ürün kartlarının kendisini beyaz/açık yapalım. */
 }
 
+/* Tek Bir Ürün Öğesi (Minimalist Kart) */
 .urun-kart {
-    width: 280px; 
-    background-color: #1a1a1a; /* Daha yumuşak koyu gri */
-    padding: 20px;
-    border: 1px solid #333333;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
-}
-
-.urun-kart img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    margin-bottom: 15px;
-    border-radius: 4px;
-}
-
-.urun-kart h3 {
-    color: #FFFFFF;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
-.urun-kart .fiyat {
-    color: #a0a0a0;
-    font-size: 1.4em;
-    font-weight: bold;
-    margin: 10px 0 20px 0;
-}
-
-.urun-kart button {
-    background-color: #FFFFFF; 
-    color: #000000; 
-    border: none;
-    padding: 12px 25px;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.urun-kart button:hover {
-    background-color: #CCCCCC; 
-}
-
-/* Alt Bölüm Menü */
-footer {
-    width: 100%;
-    padding: 20px 0;
-    border-top: 1px solid #FFFFFF; 
-    margin-top: auto; /* Footer'ı sayfanın en altına iter */
-}
-
-nav ul {
-    list-style: none; 
+    /* %50 - boşluk hesabı ile 2 sütunu garanti et */
+    flex: 1 1 calc(50% - 7.5px); 
+    max-width: calc(50% - 7.5px); /* Maksimum genişlik sınırı */
+    
+    /* Yeni tasarımda kartın kendisinde arka plan veya border yok */
+    background-color: transparent; 
     padding: 0;
+    border: none; 
+    box-shadow: none; 
+    text-align: left; /* Yazılar sola yaslı */
+    overflow: hidden; /* İçerik taşmasını engelle */
+}
+
+/* Ürün Görseli Kapsayıcısı ve Hızlı Ekleme Butonu */
+.urun-gorsel-kapsayici {
+    position: relative;
+    width: 100%;
+    /* Giyim/Pantolon gibi bir ürün dikey oranda olduğu için yükseklik oranı ayarı */
+    padding-top: 130%; 
+    overflow: hidden;
+    background-color: #1a1a1a; /* Görsel yüklenene kadar koyu arka plan */
+}
+
+.urun-gorsel-kapsayici img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     margin: 0;
-    display: flex; 
-    justify-content: center; 
-    gap: 40px; 
+    border-radius: 0;
 }
 
-nav ul li a {
-    color: #FFFFFF; 
-    text-decoration: none; 
-    font-weight: bold;
-    transition: color 0.3s; 
-}
-
-nav ul li a:hover {
-    color: #AAAAAA; 
-}
-
-/* --- İLETİŞİM SAYFASI STİLLERİ --- */
-
-#iletisim-formu {
-    width: 90%;
-    max-width: 600px; /* Form alanını sınırla */
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #1a1a1a; /* Form kutusuna koyu arka plan */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-}
-
-#iletisim-formu h2 {
-    margin-bottom: 30px;
-    font-size: 2em;
-    color: #FFFFFF;
-}
-
-.form-grup {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.form-grup label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-.form-grup input[type="text"],
-.form-grup input[type="email"],
-.form-grup textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #333333;
-    border-radius: 4px;
-    background-color: #000000; /* Giriş alanları siyah olsun */
-    color: #FFFFFF; /* Yazı rengi beyaz olsun */
-    box-sizing: border-box; /* Padding ve border'ı genişliğe dahil et */
-}
-
-.form-grup textarea {
-    resize: vertical; /* Sadece dikey olarak boyutlandırmaya izin ver */
-}
-
-#iletisim-formu button[type="submit"] {
-    width: 100%;
-    background-color: #FFFFFF;
-    color: #000000;
-    border: none;
-    padding: 15px;
-    font-weight: bold;
-    font-size: 1.1em;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 10px;
-    transition: background-color 0.3s;
-}
-
-#iletisim-formu button[type="submit"]:hover {
-    background-color: #CCCCCC;
-}
-
-/* --- HAKKIMIZDA SAYFASI STİLLERİ --- */
-
-#hakkimizda-icerik {
-    width: 80%;
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 30px;
-    text-align: center;
-}
-
-#hakkimizda-icerik p {
-    line-height: 1.8; /* Okunurluğu artırmak için satır aralığı */
-    font-size: 1.1em;
-    margin-bottom: 25px;
-    color: #CCCCCC;
-}
-
-.giris-paragrafi {
-    font-style: italic;
-    font-size: 1.2em !important;
-    margin-bottom: 40px !important;
-}
-
-.vizyon-misyon {
-    display: flex;
-    justify-content: space-around;
-    gap: 40px;
-    margin: 50px 0;
-}
-
-.vizyon, .misyon {
-    flex-basis: 45%; /* Yan yana durmaları için alanın %45'ini kapla */
-    padding: 20px;
-    border: 1px solid #333333;
-    border-radius: 5px;
-    background-color: #111111;
-}
-
-.vizyon h3, .misyon h3 {
-    color: #FFFFFF;
-    border-bottom: 2px solid #FFFFFF;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-/* --- ARAMA ÇUBUĞU STİLLERİ --- */
-
-#arama-cubugu {
-    width: 100%;
-    max-width: 500px; /* Arama çubuğunun genişliğini sınırla */
-    margin: 15px auto 30px auto; /* Üstte ve altta boşluk bırak */
-    display: flex; /* İçindeki kutu ve düğmeyi yan yana diz */
-    justify-content: center;
-}
-
-#arama-kutusu {
-    padding: 10px 15px;
-    width: 70%;
-    border: 1px solid #555555;
-    border-right: none; /* Butonla birleşmesi için sağ çizgiyi kaldır */
-    border-radius: 4px 0 0 4px; /* Sadece soldan yuvarla */
+/* Hızlı Ekleme Butonu (+) - Sepete Ekle'nin yerini alır */
+.hizli-ekle {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #FFFFFF;
     background-color: #000000;
     color: #FFFFFF;
-    font-size: 1em;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    z-index: 10; /* Görselin üzerinde kalmasını sağla */
 }
 
-#arama-kutusu::placeholder {
-    color: #888888;
-}
-
-#arama-butonu {
-    padding: 10px 15px;
-    border: 1px solid #FFFFFF;
-    border-radius: 0 4px 4px 0; /* Sadece sağdan yuvarla */
+.hizli-ekle:hover {
     background-color: #FFFFFF;
     color: #000000;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
 }
 
-#arama-butonu:hover {
-    background-color: #CCCCCC;
+/* Ürün Bilgileri (İsim, Meta, Fiyat) */
+.urun-bilgileri {
+    padding-top: 8px;
+    color: #FFFFFF; /* Yazı rengini beyaz tut */
 }
 
-/* ======================================= */
-/* --- GÜNCELLENMİŞ MOBİL UYUM STİLLERİ --- */
-/* ======================================= */
-
-@media (max-width: 768px) {
-    
-    /* Başlık (Header) ve İsim Alanı */
-    header {
-        padding: 20px 10px 10px 10px; /* Daha az dikey boşluk */
-    }
-
-    header h1 {
-        font-size: 1.5em; /* İsim daha küçük */
-        letter-spacing: 5px;
-    }
-
-    /* Arama Çubuğunu Header'a sabitle */
-    #arama-cubugu {
-        width: 90%; 
-        margin: 10px auto 20px auto; /* Daha az üst boşluk */
-    }
-
-    /* Ana İçerik (Main) Alanı */
-    main {
-        padding: 0 10px; /* Yanlardan hafif boşluk */
-    }
-
-    /* --- ÜRÜN VE SLIDER ALANLARI --- */
-    
-    #slider-alan {
-        margin: 15px auto;
-    }
-    
-    /* Ürün Kartlarını Tek Sütuna Çevir ve Ortala */
-    .urun-grid {
-        flex-direction: column;
-        gap: 20px;
-        width: 100%;
-    }
-    
-    .urun-kart {
-        width: 95%; /* Yanlara neredeyse tam yapışsın */
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    
-    /* --- MENÜ (FOOTER) --- */
-    footer {
-        flex-direction: column; 
-        padding: 15px 0 10px 0;
-    }
-    
-    footer nav ul {
-        flex-direction: column;
-        gap: 8px; /* Menü öğeleri arasında az boşluk */
-        font-size: 0.9em;
-    }
-
-    /* --- DETAY VE İLETİŞİM SAYFALARI --- */
-    
-    /* Ürün Detay Sayfası Alt Alta */
-    #urun-detay-alani {
-        flex-direction: column;
-        padding: 20px 0;
-        gap: 20px;
-    }
-    
-    .detay-bilgi h2 {
-        font-size: 1.8em;
-    }
-    
-    /* Hakkımızda Sayfası Alt Alta */
-    .vizyon-misyon {
-        flex-direction: column; 
-        gap: 20px;
-    }
+.urun-isim {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    /* h3 yerine p kullandık, bu yüzden h3 stilini kullanmıyoruz */
 }
 
-/* Telefonlar için ekstra dar ayar (Örn: 480px altı) */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.3em;
-        letter-spacing: 4px;
-    }
-    
-    /* Arama kutusu padding'i küçült */
-    #arama-kutusu, #arama-butonu {
-        padding: 8px 12px;
-    }
+.fiyat {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 3px 0 0 0;
+    color: #FFFFFF;
 }
 
+/* Ek Seçenekler ve Renk Göstergeleri */
+.urun-meta {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #AAAAAA; /* Seçenek sayısı gri */
+    margin-bottom: 2px;
+}
+
+.renk-gosterge {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #FFFFFF; /* Renk çerçevesi beyaz */
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.renk-gosterge.siyah {
+    background-color: black;
+}
+.renk-gosterge.beyaz {
+    background-color: white;
+}
+
+.secenek-sayisi {
+    font-weight: 400;
+}
+
+/* Varsayılan Sepete Ekle Butonunu Gizle veya Sil */
+.urun-kart button:not(.hizli-ekle) { 
+    display: none; 
+}
+
+/* Link stilini sıfırla (alt çizgiyi kaldır) */
+.urun-link {
+    text-decoration: none;
+    color: inherit;
+}
