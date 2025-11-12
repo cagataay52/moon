@@ -1,60 +1,147 @@
 /* Genel Ayarlar ve Sıfırlamalar */
 body {
-    /* Arka planı siyah, yazıyı beyaz yaptık (Beyaz bir arka plan da deneyebiliriz!) */
-    background-color: #000000; /* Siyah Arka Plan */
-    color: #FFFFFF; /* Beyaz Yazı Rengi */
-    font-family: Arial, sans-serif; /* Okunabilir bir yazı tipi */
-    margin: 0; /* Sayfanın kenar boşluklarını sıfırladık */
+    /* Siyah Arka Plan, Beyaz Yazı */
+    background-color: #000000; 
+    color: #FFFFFF; 
+    font-family: Arial, sans-serif; 
+    margin: 0; 
     padding: 0;
-    min-height: 100vh; /* Sayfanın en az tam ekran yüksekliğinde olmasını sağladık */
+    min-height: 100vh; 
     display: flex;
-    flex-direction: column; /* İçerikleri dikey olarak düzenle */
-    text-align: center; /* Tüm içeriği ortala */
+    flex-direction: column; /* İçeriği dikey sırala (ÖNEMLİ DÜZELTME) */
+    text-align: center; 
 }
 
 /* 1. Üst Bölüm: İsim (M O O N) */
 header {
     padding: 30px 0;
-    font-size: 2em; /* Yazıyı büyüttük */
-    letter-spacing: 5px; /* Harfler arasına boşluk koyarak şık bir görünüm verdik */
+    font-size: 2em; 
+    letter-spacing: 10px; /* Harf aralığını biraz daha açtık */
 }
 
-/* 2. Ana İçerik Alanı */
+/* Ana İçerik Alanı - Düzenleme */
 main {
-    flex-grow: 1; /* Ortadaki içeriğin kalan tüm alanı kaplamasını sağladık */
-    padding: 20px;
+    flex-grow: 1; 
+    /* Ana içeriğin kendi içinde dikey akmasını sağla */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; 
+    align-items: center; /* İçerikleri yatayda ortala */
+    width: 100%;
 }
 
-/* 3. Alt Bölüm: Menü Sekmeleri */
+/* --- 1. SLIDER ALANI STİLİ --- */
+#slider-alan {
+    width: 90%; /* Kutu içeriğini ortalamak için genişlik */
+    max-width: 1200px; 
+    margin: 40px auto 60px auto; /* Üst ve alt boşluk ekledik */
+    text-align: center;
+}
+
+#slider-alan h2 {
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+#reklam-gorseli {
+    width: 100%;
+    height: auto;
+    max-height: 450px; 
+    object-fit: cover; 
+    border: 3px solid #FFFFFF; 
+    display: block; /* Görselin kapladığı alanı netleştirir */
+}
+
+/* --- 2. ÜRÜNLER ALANI STİLİ --- */
+#urunler-alan {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding-bottom: 50px; /* Alt boşluk */
+    text-align: center;
+}
+
+#urunler-alan h2 {
+    margin-bottom: 40px;
+    font-size: 2em;
+}
+
+/* Ürün kartlarını düzenleme */
+.urun-grid {
+    display: flex;
+    justify-content: center; /* Kartları ortaya topla */
+    gap: 30px; 
+    flex-wrap: wrap; 
+}
+
+.urun-kart {
+    width: 280px; 
+    background-color: #1a1a1a; /* Daha yumuşak koyu gri */
+    padding: 20px;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+}
+
+.urun-kart img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.urun-kart h3 {
+    color: #FFFFFF;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.urun-kart .fiyat {
+    color: #a0a0a0;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 10px 0 20px 0;
+}
+
+.urun-kart button {
+    background-color: #FFFFFF; 
+    color: #000000; 
+    border: none;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.urun-kart button:hover {
+    background-color: #CCCCCC; 
+}
+
+/* Alt Bölüm Menü */
 footer {
     width: 100%;
     padding: 20px 0;
-    /* Menüye ince bir beyaz çizgi ekledik */
     border-top: 1px solid #FFFFFF; 
+    margin-top: auto; /* Footer'ı sayfanın en altına iter */
 }
 
-/* Menü listesi ayarları */
 nav ul {
-    list-style: none; /* Noktaları kaldırdık */
+    list-style: none; 
     padding: 0;
     margin: 0;
-    display: flex; /* Menü öğelerini yan yana dizdik */
-    justify-content: center; /* Menü öğelerini ortaladık */
-    gap: 40px; /* Menü öğeleri arasına boşluk koyduk */
+    display: flex; 
+    justify-content: center; 
+    gap: 40px; 
 }
 
-/* Menü bağlantıları (linkler) */
 nav ul li a {
-    color: #FFFFFF; /* Bağlantı yazı rengini beyaz yaptık */
-    text-decoration: none; /* Alt çizgiyi kaldırdık */
+    color: #FFFFFF; 
+    text-decoration: none; 
     font-weight: bold;
-    transition: color 0.3s; /* Renk değişimine yumuşak bir geçiş ekledik */
+    transition: color 0.3s; 
 }
 
-/* Fare menünün üzerine gelince rengi değiştir */
 nav ul li a:hover {
-    color: #AAAAAA; /* Üzerine gelince biraz griye döner */
+    color: #AAAAAA; 
 }

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moon</title>
     <link rel="stylesheet" href="style.css">
-</head>
+    
+    </head>
 <body>
 
     <header>
@@ -13,7 +14,6 @@
     </header>
 
     <main>
-        <main>
         
         <section id="slider-alan">
             <h2>ÖNE ÇIKANLAR</h2>
@@ -45,111 +45,11 @@
                     <p class="fiyat">120,50 TL</p>
                     <button>Sepete Ekle</button>
                 </div>
-                
-                </div>
+            </div>
         </section>
 
     </main>
     
-    ```
-
-## 🎨 Adım 2: Slider ve Ürün Stilleri (CSS)
-
-`style.css` dosyanızı açın ve en alta bu kodları ekleyerek bu yeni bölümlerin görünümünü ayarlayalım:
-
-```css
-/* Ana içerik alanını yeniden düzenliyoruz */
-main {
-    flex-direction: column; /* İçeriğin dikey akmasını sağla */
-    padding: 0; /* Ana içerik boşluğunu sıfırla */
-    width: 100%;
-}
-
-/* 1. SLIDER ALANI STİLİ */
-#slider-alan {
-    width: 100%;
-    max-width: 1200px; /* Slider'ın maksimum genişliği */
-    margin: 30px auto;
-    text-align: center;
-}
-
-#slider-alan h2 {
-    margin-bottom: 20px;
-    font-size: 1.5em;
-}
-
-#reklam-gorseli {
-    width: 100%;
-    height: auto;
-    max-height: 400px; /* Görselin yüksekliğini sınırla */
-    object-fit: cover; /* Görselin alanı doldurmasını sağlar */
-    border: 5px solid #FFFFFF; /* Beyaz çerçeve ekledik */
-}
-
-/* 2. ÜRÜNLER ALANI STİLİ */
-#urunler-alan {
-    width: 90%;
-    max-width: 1200px;
-    margin: 50px auto;
-    text-align: center;
-}
-
-#urunler-alan h2 {
-    margin-bottom: 40px;
-    font-size: 2em;
-}
-
-/* Ürün kartlarını düzenleme */
-.urun-grid {
-    display: flex;
-    justify-content: space-around; /* Kartlar arasına boşluk koy */
-    gap: 30px; /* Kartlar arasındaki boşluk */
-    flex-wrap: wrap; /* Gerekirse alt satıra geç */
-}
-
-.urun-kart {
-    width: 300px; /* Her kartın genişliği */
-    background-color: #111111; /* Koyu arka plan */
-    padding: 20px;
-    border: 1px solid #333333;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
-.urun-kart img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    margin-bottom: 15px;
-}
-
-.urun-kart h3 {
-    color: #FFFFFF;
-    margin-top: 0;
-}
-
-.urun-kart .fiyat {
-    color: #AAAAAA;
-    font-size: 1.3em;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.urun-kart button {
-    background-color: #FFFFFF; /* Beyaz düğme */
-    color: #000000; /* Siyah yazı */
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.urun-kart button:hover {
-    background-color: #CCCCCC; /* Üzerine gelince koyulaşsın */
-}
-        </main>
-
     <footer>
         <nav>
             <ul>
