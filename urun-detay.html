@@ -5,12 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moon | Yıldız Tozu Defter Detay</title>
     <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <script src="script.js" defer></script>
 </head>
 <body>
 
     <header>
         <h1>YILDIZ TOZU DEFTER</h1>
+        <div id="arama-cubugu">
+            <input type="text" id="arama-kutusu" placeholder="Ürün Ara...">
+            <button id="arama-butonu">Ara</button>
+        </div>
     </header>
 
     <main>
@@ -41,7 +49,7 @@
                 
                 <button id="detay-sepete-ekle" 
                         onclick="sepeteEkle('Yıldız Tozu Defter', 120.50)">
-                    Sepete Ekle
+                    SEPETE EKLE
                 </button>
                 
                 <p class="guvenlik">Hızlı ve güvenli ödeme seçenekleri.</p>
@@ -58,6 +66,18 @@
                 <li><a href="iletisim.html">İLETİŞİM</a></li>
             </ul>
         </nav>
+        
+        <div id="sosyal-medya">
+            <a href="https://www.instagram.com/moon" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.twitter.com/moon" target="_blank" title="X (Twitter)">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/moon" target="_blank" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
     </footer>
 
 </body>

@@ -15,8 +15,8 @@ const degisimSuresi = 3000;
 function gorseliDegistir() {
     gorselElementi.src = gorseller[mevcutIndex];
     mevcutIndex++;
-    if (mevcutIndex >= gorseller.length) {
-        mevcutIndex = 0;
+    if (mevcuttIndex >= gorseller.length) {
+        mevcuttIndex = 0;
     }
 }
 
@@ -72,45 +72,40 @@ function guncelSepetiGoster() {
 
 
 // =======================================
-// --- YENİ SEPET ETKİLEŞİMİ (GÜNCEL HTML'E UYARLANDI) ---
+// --- YENİ SEPET ETKİLEŞİMİ (GÜVENİLİR YÖNTEM) ---
 // =======================================
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Görsel kapsayıcıları seç (Artık '+' ikonu bu alanda)
+    // Tüm görsel kapsayıcılarını seç
     const gorselKapsayicilar = document.querySelectorAll('.urun-gorsel-kapsayici');
 
     gorselKapsayicilar.forEach(kapsayici => {
         
-        // Sadece '+' ikonuna benzeyen alana tıklanmayı yakalamak için
+        // Tıklama olayını görsel kapsayıcıda dinle
         kapsayici.addEventListener('click', (event) => {
             
-            // Tıklanan noktanın, CSS ile oluşturulan '+' butonuna yakın olup olmadığını kontrol edelim.
-            // Burası tarayıcıda hassas bir ayar gerektirir, ancak en basit ve güvenilir yöntem:
-            
-            // Eğer fare, kapsayıcının sağ alt köşesine yakın bir yere tıklandıysa, 
-            // bunun sepete ekleme işlemi olduğunu varsayalım.
             const rect = kapsayici.getBoundingClientRect();
             const clickX = event.clientX;
             const clickY = event.clientY;
             
-            // Görselin sağ alt köşesinin yaklaşık %10'luk alanını hedefle (Basit Yaklaşım)
+            // Sepet Butonu Alanı: Sağ alt köşeden 40px x 40px'lik bir alan hedefle
             const isNearPlusButton = 
-                clickX > (rect.right - rect.width * 0.2) && 
-                clickY > (rect.bottom - rect.height * 0.2);
+                clickX > (rect.right - 40) && 
+                clickY > (rect.bottom - 40);
 
             if (isNearPlusButton) {
                 
                 // Link navigasyonunu durdur (Detay sayfasına gitmesin)
                 event.preventDefault();
-                event.stopPropagation(); // Olayın üst elemanlara sıçramasını engelle
+                event.stopPropagation(); // Olayın diğer elementlere sıçramasını engelle
                 
                 // Ürün bilgilerini HTML yapısından çek
-                // .urun-kart etiketi bu kapsayıcının ebeveynidir
                 const urunKart = kapsayici.closest('.urun-kart');
                 
-                const urunAdi = urunKart.querySelector('.urun-isim').textContent.trim();
-                let urunFiyatiMetin = urunKart.querySelector('.fiyat').textContent.trim();
+                // Hata Kontrolü: Bu seçicilerin (urun-isim, fiyat) var olduğundan emin ol
+                const urunAdi = urunKart.querySelector('.urun-isim') ? urunKart.querySelector('.urun-isim').textContent.trim() : 'Bilinmeyen Ürün';
+                let urunFiyatiMetin = urunKart.querySelector('.fiyat') ? urunKart.querySelector('.fiyat').textContent.trim() : '0 TL';
                 
                 // Fiyatı sayıya çevir
                 urunFiyatiMetin = urunFiyatiMetin.replace(' TL', '').replace(',', '.');
