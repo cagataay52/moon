@@ -1,49 +1,42 @@
-// Slider'da kullanılacak görsel isimlerinin listesi
-// NOT: Bu isimlerde görselleri deponuza yüklemelisiniz (gorsel-1.jpg, gorsel-2.jpg, gorsel-3.jpg)
+// =======================================
+// --- SLIDER İŞLEVİ (DEĞİŞMEDİ) ---
+// =======================================
+
 const gorseller = [
     "gorsel-1.jpg", 
     "gorsel-2.jpg", 
     "gorsel-3.jpg"
 ];
 
-let mevcutIndex = 0; // Şu anki görselin listedeki konumu (index'i)
+let mevcutIndex = 0;
 const gorselElementi = document.getElementById('reklam-gorseli');
-const degisimSuresi = 3000; // Görsel değişim süresi (3000 milisaniye = 3 saniye)
+const degisimSuresi = 3000;
 
 function gorseliDegistir() {
-    // Mevcut görselin kaynak (src) özelliğini güncelliyoruz
     gorselElementi.src = gorseller[mevcutIndex];
-
-    // Bir sonraki görsele geçmek için index'i artır
     mevcutIndex++;
-
-    // Eğer index listenin sonuna geldiyse, başa dön (sonsuz döngü)
     if (mevcutIndex >= gorseller.length) {
         mevcutIndex = 0;
     }
 }
 
-// Sayfa yüklendiğinde gorseliDegistir fonksiyonunu belirli aralıklarla çalıştırmaya başla
 setInterval(gorseliDegistir, degisimSuresi);
-
-// İlk görselin hemen görünmesi için fonksiyonu bir kez çağır
 gorseliDegistir();
 
-// Sepetimiz için boş bir dizi (array) oluşturuyoruz.
-// Sepetteki her ürün bir obje olarak bu diziye eklenecek.
+
+// =======================================
+// --- SEPET FONKSİYONLARI (DEĞİŞMEDİ) ---
+// =======================================
+
 const sepet = [];
 
-// Sepeti güncelleyen ve kullanıcıya bilgi veren ana fonksiyon
 function sepeteEkle(urunAdi, urunFiyati) {
-    // 1. Ürünün sepette olup olmadığını kontrol et
     const mevcutUrun = sepet.find(urun => urun.ad === urunAdi);
 
     if (mevcutUrun) {
-        // Ürün zaten sepetteyse, sadece miktarını artır
         mevcutUrun.miktar++;
         console.log(`${urunAdi} miktarı artırıldı. Yeni miktar: ${mevcutUrun.miktar}`);
     } else {
-        // Ürün sepette yoksa, yeni bir obje olarak ekle
         sepet.push({
             ad: urunAdi,
             fiyat: urunFiyati,
@@ -52,15 +45,11 @@ function sepeteEkle(urunAdi, urunFiyati) {
         console.log(`${urunAdi} sepete eklendi.`);
     }
 
-    // 2. Kullanıcıya geri bildirim ver (Şimdilik tarayıcı uyarısı)
     alert(`${urunAdi} sepete başarıyla eklendi! \n\nSepetteki Toplam Ürün Sayısı: ${toplamUrunSayisiHesapla()}`);
-
-    // 3. Konsol çıktısı ile sepetin durumunu göster (geliştirici için)
     console.log("Güncel Sepet Durumu:", sepet);
-    guncelSepetiGoster(); // Yeni eklenen yardımcı fonksiyonu çağır
+    guncelSepetiGoster();
 }
 
-// Toplam ürün miktarını hesaplayan yardımcı fonksiyon
 function toplamUrunSayisiHesapla() {
     let toplam = 0;
     sepet.forEach(urun => {
@@ -69,7 +58,6 @@ function toplamUrunSayisiHesapla() {
     return toplam;
 }
 
-// Sadece geliştiricinin görebileceği konsola sepet detaylarını yazan fonksiyon
 function guncelSepetiGoster() {
     let toplamFiyat = 0;
     let sepetDetay = "--- Sepet Detayları ---\n";
@@ -82,44 +70,61 @@ function guncelSepetiGoster() {
     console.log(sepetDetay);
 }
 
-// Yeni ve daha güçlü düğme dinleyici ekleme mekanizması
-// BU BÖLÜM YENİ HTML/CSS TASARIMINA GÖRE GÜNCELLENMİŞTİR
+
+// =======================================
+// --- YENİ SEPET ETKİLEŞİMİ (GÜNCEL HTML'E UYARLANDI) ---
+// =======================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Sayfadaki tüm HIZLI EKLE (+) düğmelerini seç (yeni tasarıma göre)
-    const sepeteEkleDugmeleri = document.querySelectorAll('.urun-kart .hizli-ekle');
+    
+    // Görsel kapsayıcıları seç (Artık '+' ikonu bu alanda)
+    const gorselKapsayicilar = document.querySelectorAll('.urun-gorsel-kapsayici');
 
-    console.log(`Sayfada bulunan hızlı ekle düğmesi sayısı: ${sepeteEkleDugmeleri.length}`); 
-
-    sepeteEkleDugmeleri.forEach(button => {
-        // Düğme tıklandığında ne yapılacağını tanımla
-        button.addEventListener('click', (event) => {
+    gorselKapsayicilar.forEach(kapsayici => {
+        
+        // Sadece '+' ikonuna benzeyen alana tıklanmayı yakalamak için
+        kapsayici.addEventListener('click', (event) => {
             
-            // Tıklanan düğmenin ait olduğu ürün kartını bul
-            const urunKart = event.target.closest('.urun-kart');
+            // Tıklanan noktanın, CSS ile oluşturulan '+' butonuna yakın olup olmadığını kontrol edelim.
+            // Burası tarayıcıda hassas bir ayar gerektirir, ancak en basit ve güvenilir yöntem:
+            
+            // Eğer fare, kapsayıcının sağ alt köşesine yakın bir yere tıklandıysa, 
+            // bunun sepete ekleme işlemi olduğunu varsayalım.
+            const rect = kapsayici.getBoundingClientRect();
+            const clickX = event.clientX;
+            const clickY = event.clientY;
+            
+            // Görselin sağ alt köşesinin yaklaşık %10'luk alanını hedefle (Basit Yaklaşım)
+            const isNearPlusButton = 
+                clickX > (rect.right - rect.width * 0.2) && 
+                clickY > (rect.bottom - rect.height * 0.2);
 
-            // Ürün bilgilerini HTML yapısından çek (YENİ SEÇİCİLER KULLANILARAK)
-            // Ürün adı artık .urun-isim sınıfına sahip p etiketi içinde
-            const urunAdiElementi = urunKart.querySelector('.urun-bilgileri .urun-isim');
-            // Fiyat seçicisi
-            const urunFiyatiElementi = urunKart.querySelector('.urun-bilgileri .fiyat'); 
+            if (isNearPlusButton) {
+                
+                // Link navigasyonunu durdur (Detay sayfasına gitmesin)
+                event.preventDefault();
+                event.stopPropagation(); // Olayın üst elemanlara sıçramasını engelle
+                
+                // Ürün bilgilerini HTML yapısından çek
+                // .urun-kart etiketi bu kapsayıcının ebeveynidir
+                const urunKart = kapsayici.closest('.urun-kart');
+                
+                const urunAdi = urunKart.querySelector('.urun-isim').textContent.trim();
+                let urunFiyatiMetin = urunKart.querySelector('.fiyat').textContent.trim();
+                
+                // Fiyatı sayıya çevir
+                urunFiyatiMetin = urunFiyatiMetin.replace(' TL', '').replace(',', '.');
+                const urunFiyati = parseFloat(urunFiyatiMetin);
 
-            // Metin değerlerini al
-            const urunAdi = urunAdiElementi ? urunAdiElementi.textContent.trim() : 'Bilinmeyen Ürün';
-            let urunFiyatiMetin = urunFiyatiElementi ? urunFiyatiElementi.textContent.trim() : '0 TL';
-
-            // Fiyat metnini sayıya çevir (Örn: "199,90 TL" -> 199.90)
-            urunFiyatiMetin = urunFiyatiMetin.replace(' TL', '').replace(',', '.');
-            const urunFiyati = parseFloat(urunFiyatiMetin);
-
-            // Sepete ekleme fonksiyonunu çağır
-            if (!isNaN(urunFiyati)) {
-                sepeteEkle(urunAdi, urunFiyati);
-            } else {
-                alert('Hata: Ürün fiyatı belirlenemedi.');
+                // Sepete ekleme fonksiyonunu çağır
+                if (!isNaN(urunFiyati)) {
+                    sepeteEkle(urunAdi, urunFiyati);
+                } else {
+                    console.error('Hata: Ürün fiyatı belirlenemedi.');
+                }
             }
-            
-            // (+) butonuna tıklandığında linkin çalışmasını engelle (önemli)
-            event.preventDefault();
+            // Eğer '+' butonuna yakın bir yere tıklanmadıysa, 
+            // varsayılan davranış (ürün detay sayfasına gitmek) gerçekleşecektir.
         });
     });
 });
