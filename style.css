@@ -3,12 +3,11 @@
 /* ======================================= */
 
 body {
-    /* Font bağlantısını HTML'e eklemeyi unutmayın! */
     font-family: 'Montserrat', sans-serif; 
     font-weight: 400; 
     
-    background-color: #FFFFFF; /* YENİ ARKA PLAN: Beyaz */
-    color: #000000; /* YENİ YAZI RENGİ: Siyah */
+    background-color: #FFFFFF; /* Beyaz Tema */
+    color: #000000; /* Siyah Yazı */
     margin: 0; 
     padding: 0;
     min-height: 100vh; 
@@ -168,7 +167,7 @@ main {
     display: none; 
 }
 
-/* --- SOSYAL MEDYA İKONLARI STİLLERİ --- */
+/* --- SOSYAL MEDYA VE FOOTER STİLLERİ --- */
 
 /* Footer yapısını ikonları ve menüyü ayırmak için düzenle */
 footer {
@@ -207,7 +206,6 @@ footer nav {
 
 /* --- ZORUNLU MİNİMALİST ÜRÜN KARTI EKLEMELERİ --- */
 
-/* Ürün Görsel Kapsayıcı (Resmin dikey oranını korur) */
 .urun-gorsel-kapsayici {
     position: relative;
     width: 100%;
@@ -307,7 +305,7 @@ footer nav {
     line-height: 1.8;
     font-size: 1.1em;
     margin-bottom: 25px;
-    color: #000000; /* Siyah Yazı */
+    color: #000000;
 }
 
 .giris-paragrafi {
@@ -326,7 +324,7 @@ footer nav {
 .vizyon, .misyon {
     flex-basis: 45%;
     padding: 20px;
-    background-color: #FFFFFF; /* Beyaz kutu */
+    background-color: #FFFFFF;
     border: 1px solid #CCCCCC;
     border-radius: 5px;
 }
@@ -345,7 +343,7 @@ footer nav {
     max-width: 600px; 
     margin: 50px auto;
     padding: 30px;
-    background-color: #F8F8F8; /* Hafif Gri Zemin */
+    background-color: #F8F8F8;
     border-radius: 4px;
     box-shadow: none; 
     border: 1px solid #EEEEEE;
