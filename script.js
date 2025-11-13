@@ -1,5 +1,5 @@
 // =======================================
-// --- SLIDER İŞLEVİ (DEĞİŞMEDİ) ---
+// --- SLIDER İŞLEVİ (YAZIM HATASI DÜZELTİLDİ) ---
 // =======================================
 
 const gorseller = [
@@ -8,15 +8,15 @@ const gorseller = [
     "gorsel-3.jpg"
 ];
 
-let mevcutIndex = 0;
+let mevcutIndex = 0; // Doğru değişken adı
 const gorselElementi = document.getElementById('reklam-gorseli');
 const degisimSuresi = 3000;
 
 function gorseliDegistir() {
     gorselElementi.src = gorseller[mevcutIndex];
     mevcutIndex++;
-    if (mevcuttIndex >= gorseller.length) {
-        mevcuttIndex = 0;
+    if (mevcutIndex >= gorseller.length) {
+        mevcutIndex = 0; // Hata düzeltildi: mevcuttIndex -> mevcutIndex
     }
 }
 
@@ -25,7 +25,7 @@ gorseliDegistir();
 
 
 // =======================================
-// --- SEPET FONKSİYONLARI (DEĞİŞMEDİ) ---
+// --- SEPET FONKSİYONLARI (DOĞRU) ---
 // =======================================
 
 const sepet = [];
@@ -72,7 +72,7 @@ function guncelSepetiGoster() {
 
 
 // =======================================
-// --- YENİ SEPET ETKİLEŞİMİ (GÜVENİLİR YÖNTEM) ---
+// --- YENİ SEPET ETKİLEŞİMİ (DOĞRU VE GÜVENİLİR YÖNTEM) ---
 // =======================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const clickX = event.clientX;
             const clickY = event.clientY;
             
-            // Sepet Butonu Alanı: Sağ alt köşeden 40px x 40px'lik bir alan hedefle
+            // Sepet Butonu Alanı: Sağ alt köşeden 40px x 40px'lik bir alan hedefle (CSS'teki '+' ikonunun boyutuna göre)
             const isNearPlusButton = 
                 clickX > (rect.right - 40) && 
                 clickY > (rect.bottom - 40);

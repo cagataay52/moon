@@ -1,10 +1,180 @@
+/* ======================================= */
+/* --- GENEL AYARLAR VE SIFIRLAMALAR --- */
+/* ======================================= */
+
+body {
+    /* Font bağlantısını HTML'e eklemeyi unutmayın! */
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 400; 
+    
+    background-color: #FFFFFF; /* YENİ ARKA PLAN: Beyaz */
+    color: #000000; /* YENİ YAZI RENGİ: Siyah */
+    margin: 0; 
+    padding: 0;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column; 
+    text-align: center; 
+}
+
+/* 1. Üst Bölüm: İsim (M O O N) */
+header {
+    padding: 30px 0;
+    font-size: 2em; 
+    letter-spacing: 10px; 
+    color: #000000; 
+    border-bottom: 1px solid #EEEEEE; 
+}
+
+/* --- ARAMA ÇUBUĞU STİLLERİ --- */
+#arama-cubugu {
+    width: 100%;
+    max-width: 500px; 
+    margin: 15px auto 30px auto; 
+    display: flex; 
+    justify-content: center;
+}
+
+#arama-kutusu {
+    padding: 10px 15px;
+    width: 70%;
+    border: 1px solid #CCCCCC; 
+    border-right: none; 
+    border-radius: 4px 0 0 4px; 
+    background-color: #FFFFFF; 
+    color: #000000; 
+    font-size: 1em;
+}
+
+#arama-kutusu::placeholder {
+    color: #888888;
+}
+
+#arama-butonu {
+    padding: 10px 15px;
+    border: 1px solid #CCCCCC;
+    border-radius: 0 4px 4px 0; 
+    background-color: #000000; 
+    color: #FFFFFF; 
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+#arama-butonu:hover {
+    background-color: #333333;
+}
+
+/* Ana İçerik Alanı */
+main {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+}
+
+/* --- SLIDER ALANI STİLİ --- */
+#slider-alan {
+    width: 90%; 
+    max-width: 1200px; 
+    margin: 40px auto 60px auto; 
+    text-align: center;
+}
+
+#slider-alan h2 {
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    color: #000000;
+}
+
+#reklam-gorseli {
+    width: 100%;
+    height: auto;
+    max-height: 450px; 
+    object-fit: cover; 
+    border: none;
+    display: block; 
+}
+
+/* --- ÜRÜNLER ALANI GENEL STİLİ (MİNİMALİST TEMA) --- */
+#urunler-alan {
+    width: 95%; 
+    max-width: 1300px;
+    margin: 50px auto;
+    padding-bottom: 50px; 
+    text-align: center;
+}
+
+#urunler-alan h2 {
+    margin-bottom: 40px;
+    font-size: 1.5em; 
+    font-weight: 400;
+    color: #000000;
+}
+
+/* Ürün Grid Düzeni */
+.urun-grid {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 15px;
+    justify-content: center; 
+}
+
+/* Tek Bir Ürün Öğesi (Minimalist Kart) */
+.urun-kart {
+    flex: 1 1 calc(50% - 7.5px); 
+    max-width: calc(50% - 7.5px); 
+    background-color: transparent; 
+    padding: 0;
+    border: none; 
+    box-shadow: none; 
+    text-align: left; 
+    overflow: hidden; 
+}
+
+.urun-kart img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 0;
+    border: none;
+}
+
+.urun-kart a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 0 5px; 
+}
+
+.urun-kart h3 {
+    color: #000000; 
+    font-size: 0.9em; 
+    font-weight: 500;
+    margin: 5px 0 0 0;
+    padding: 0 5px;
+}
+
+.urun-kart .fiyat {
+    color: #000000; 
+    font-size: 0.9em; 
+    font-weight: 700; 
+    margin: 2px 0 10px 0;
+    padding: 0 5px;
+}
+
+.urun-kart button { 
+    display: none; 
+}
+
 /* --- SOSYAL MEDYA İKONLARI STİLLERİ --- */
 
 /* Footer yapısını ikonları ve menüyü ayırmak için düzenle */
 footer {
-    display: flex; /* İçindeki öğeleri (menü ve ikonlar) yan yana dizer */
-    flex-direction: column; /* Menü ve ikonları dikeyde sıralar */
-    align-items: center; /* Ortalar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 25px 0 15px 0;
     width: 100%;
     border-top: 1px solid #EEEEEE; 
@@ -13,7 +183,7 @@ footer {
 
 /* Menü Navigasyonu (Footer) */
 footer nav {
-    margin-bottom: 15px; /* İkonlar ile menü arasına boşluk bırak */
+    margin-bottom: 15px;
 }
 
 /* İkonların bulunduğu alan */
@@ -23,15 +193,15 @@ footer nav {
 }
 
 #sosyal-medya a {
-    color: #000000; /* İkon rengini siyah yap */
+    color: #000000;
     font-size: 1.5em;
-    margin: 0 12px; /* İkonlar arasına boşluk koy */
+    margin: 0 12px;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 #sosyal-medya a:hover {
-    color: #666666; /* Üzerine gelince gri */
+    color: #666666;
 }
 
 
@@ -41,9 +211,9 @@ footer nav {
 .urun-gorsel-kapsayici {
     position: relative;
     width: 100%;
-    padding-top: 130%; /* Resmin yüksekliğini ayarlar (Görsel oranı) */
+    padding-top: 130%;
     overflow: hidden;
-    background-color: #F8F8F8; /* Hafif gri zemin */
+    background-color: #F8F8F8;
 }
 
 .urun-gorsel-kapsayici img {
@@ -58,15 +228,15 @@ footer nav {
 
 /* Hızlı Ekleme Butonu (+) - CSS ile eklenen ikon */
 .urun-gorsel-kapsayici::after {
-    content: "+"; /* CSS ile '+' içeriğini ekle */
+    content: "+";
     position: absolute;
     bottom: 10px;
     right: 10px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid #000000; /* Siyah çerçeve */
-    background-color: #FFFFFF; /* Beyaz arka plan */
+    border: 1px solid #000000;
+    background-color: #FFFFFF;
     color: #000000;
     font-size: 20px;
     font-weight: 300;
@@ -85,7 +255,7 @@ footer nav {
     color: #FFFFFF;
 }
 
-/* Ürün Bilgileri Sola Hizalama (HTML'deki div yapısıyla uyum için) */
+/* Ürün Bilgileri Sola Hizalama */
 .urun-bilgileri {
     padding: 8px 5px 0 5px;
     color: #000000; 
@@ -121,4 +291,329 @@ footer nav {
 }
 .renk-gosterge.beyaz {
     background-color: white;
+}
+
+/* --- HAKKIMIZDA SAYFASI STİLLERİ --- */
+
+#hakkimizda-icerik {
+    width: 80%;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    text-align: center;
+}
+
+#hakkimizda-icerik p {
+    line-height: 1.8;
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    color: #000000; /* Siyah Yazı */
+}
+
+.giris-paragrafi {
+    font-style: italic;
+    font-size: 1.2em !important;
+    margin-bottom: 40px !important;
+}
+
+.vizyon-misyon {
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    margin: 50px 0;
+}
+
+.vizyon, .misyon {
+    flex-basis: 45%;
+    padding: 20px;
+    background-color: #FFFFFF; /* Beyaz kutu */
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+
+.vizyon h3, .misyon h3 {
+    color: #000000;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* --- İLETİŞİM SAYFASI STİLLERİ --- */
+
+#iletisim-formu {
+    width: 90%;
+    max-width: 600px; 
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #F8F8F8; /* Hafif Gri Zemin */
+    border-radius: 4px;
+    box-shadow: none; 
+    border: 1px solid #EEEEEE;
+}
+
+#iletisim-formu h2 {
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #000000;
+}
+
+.form-grup input[type="text"],
+.form-grup input[type="email"],
+.form-grup textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px;
+    background-color: #FFFFFF; 
+    color: #000000; 
+    box-sizing: border-box; 
+}
+
+#iletisim-formu button[type="submit"] {
+    width: 100%;
+    background-color: #000000; 
+    color: #FFFFFF; 
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 0;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+#iletisim-formu button[type="submit"]:hover {
+    background-color: #333333;
+}
+
+/* --- ÜRÜN DETAY SAYFASI STİLLERİ --- */
+
+#urun-detay-alani {
+    display: flex;
+    gap: 40px;
+    padding: 50px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.detay-gorsel {
+    flex-basis: 50%;
+}
+
+.detay-gorsel img {
+    width: 100%;
+    height: auto;
+    border: none;
+    border-radius: 0;
+}
+
+.detay-bilgi {
+    flex-basis: 50%;
+}
+
+.detay-bilgi h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.detay-fiyat {
+    font-size: 2em;
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #EEEEEE;
+    padding-bottom: 15px;
+}
+
+.aciklama h3 {
+    font-size: 1.5em;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.detay-bilgi ul {
+    list-style: disc;
+    margin-left: 20px;
+    color: #333333;
+}
+
+.detay-bilgi ul li {
+    margin-bottom: 5px;
+}
+
+#detay-sepete-ekle {
+    width: 100%;
+    background-color: #000000;
+    color: #FFFFFF;
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 0;
+    margin-top: 30px;
+    transition: background-color 0.3s;
+}
+
+#detay-sepete-ekle:hover {
+    background-color: #333333;
+}
+
+.guvenlik {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666666;
+    margin-top: 15px;
+}
+
+/* --- ÜRÜN DETAY SEÇENEKLERİ STİLLERİ --- */
+
+.secenek-alani {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.secenek-alani h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+#secilen-renk {
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+/* Renk Seçenekleri */
+.renk-secenekleri {
+    display: flex;
+    gap: 15px;
+    justify-content: left;
+}
+
+.renk-nokta {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #CCCCCC;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.renk-nokta.aktif {
+    border: 2px solid #000000;
+    transform: scale(1.1);
+}
+
+.renk-nokta.siyah {
+    background-color: #000000;
+}
+.renk-nokta.beyaz {
+    background-color: #FFFFFF;
+}
+.renk-nokta.mavi {
+    background-color: #1F618D;
+}
+
+
+/* Beden Seçenekleri */
+.beden-secenekleri {
+    display: flex;
+    gap: 10px;
+    justify-content: left;
+}
+
+.beden-dugme {
+    padding: 8px 15px;
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #CCCCCC;
+    border-radius: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.beden-dugme.aktif,
+.beden-dugme:hover {
+    background-color: #000000;
+    color: #FFFFFF;
+    border-color: #000000;
+}
+
+/* ======================================= */
+/* --- MOBİL UYUM (RESPONSIVE) STİLLERİ --- */
+/* ======================================= */
+
+@media (max-width: 900px) {
+    
+    /* Ürün Grid Düzeni */
+    .urun-grid {
+        gap: 10px; 
+    }
+    
+    .urun-kart {
+        width: 48%;
+        max-width: none;
+        flex: 1 1 48%;
+    }
+    
+    /* Footer Menüsünü Dikey Yap */
+    footer nav ul {
+        flex-direction: column;
+        gap: 8px; 
+        font-size: 0.9em;
+    }
+
+    /* Ürün Detay Sayfası Alt Alta */
+    #urun-detay-alani {
+        flex-direction: column; 
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .detay-gorsel {
+        flex-basis: auto;
+    }
+    
+    /* Hakkımızda Sayfası Alt Alta */
+    .vizyon-misyon {
+        flex-direction: column; 
+        gap: 20px;
+    }
+}
+
+/* Telefonlar için ekstra dar ayar */
+@media (max-width: 480px) {
+    
+    header h1 {
+        font-size: 1.2em;
+        letter-spacing: 3px;
+    }
+    
+    #arama-cubugu {
+        width: 95%;
+        margin: 10px auto;
+    }
+    
+    #arama-kutusu, #arama-butonu {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+    
+    .urun-kart h3 {
+        font-size: 0.85em;
+    }
+
+    .urun-kart .fiyat {
+        font-size: 0.85em;
+        font-weight: 700;
+    }
 }
