@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moon | Koleksiyonlar</title>
     <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
     <header>
         <h1>TÜM KOLEKSİYONLAR</h1>
+        <div id="arama-cubugu">
+            <input type="text" id="arama-kutusu" placeholder="Ürün Ara...">
+            <button id="arama-butonu">Ara</button>
+        </div>
     </header>
 
     <main>
@@ -19,57 +26,98 @@
             <div class="urun-grid">
                 
                 <div class="urun-kart">
-                    <a href="urun-detay.html">
-                        <img src="urun-a.jpg" alt="Moon Işığı Kolye">
-                        <h3>Moon Işığı Kolye</h3>
+                    <a href="urun-detay.html" class="urun-link">
+                        <div class="urun-gorsel-kapsayici">
+                            <img src="urun-a.jpg" alt="Moon Işığı Kolye">
+                        </div>
+                    </a>
+                    <div class="urun-bilgileri">
+                        <p class="urun-isim">Moon Işığı Kolye</p>
+                        <div class="urun-meta">
+                            <span class="renk-gosterge siyah"></span> <span class="secenek-sayisi">+5</span>
+                        </div>
                         <p class="fiyat">199,90 TL</p>
-                    </a>
-                    <button>Sepete Ekle</button>
+                    </div>
                 </div>
 
                 <div class="urun-kart">
-                    <a href="urun-detay.html">
-                        <img src="urun-b.jpg" alt="Siyah Gece Tişörtü">
-                        <h3>Siyah Gece Tişörtü</h3>
+                    <a href="urun-detay.html" class="urun-link">
+                        <div class="urun-gorsel-kapsayici">
+                            <img src="urun-b.jpg" alt="Siyah Gece Tişörtü">
+                        </div>
+                    </a>
+                    <div class="urun-bilgileri">
+                        <p class="urun-isim">Siyah Gece Tişörtü</p>
+                        <div class="urun-meta">
+                            <span class="renk-gosterge beyaz"></span>
+                            <span class="secenek-sayisi">+8</span>
+                        </div>
                         <p class="fiyat">249,00 TL</p>
-                    </a>
-                    <button>Sepete Ekle</button>
+                    </div>
                 </div>
                 
                 <div class="urun-kart">
-                    <a href="urun-detay.html">
-                        <img src="urun-c.jpg" alt="Yıldız Tozu Defter">
-                        <h3>Yıldız Tozu Defter</h3>
+                    <a href="urun-detay.html" class="urun-link">
+                        <div class="urun-gorsel-kapsayici">
+                            <img src="urun-c.jpg" alt="Yıldız Tozu Defter">
+                        </div>
+                    </a>
+                    <div class="urun-bilgileri">
+                        <p class="urun-isim">Yıldız Tozu Defter</p>
+                        <div class="urun-meta">
+                            <span class="renk-gosterge siyah"></span>
+                            <span class="secenek-sayisi">+2</span>
+                        </div>
                         <p class="fiyat">120,50 TL</p>
-                    </a>
-                    <button>Sepete Ekle</button>
+                    </div>
                 </div>
 
                 <div class="urun-kart">
-                    <a href="urun-detay.html">
-                        <img src="urun-d.jpg" alt="Gümüş Bileklik">
-                        <h3>Gümüş Bileklik</h3>
-                        <p class="fiyat">350,00 TL</p>
+                    <a href="urun-detay.html" class="urun-link">
+                        <div class="urun-gorsel-kapsayici">
+                            <img src="urun-d.jpg" alt="Gümüş Bileklik">
+                        </div>
                     </a>
-                    <button>Sepete Ekle</button>
+                    <div class="urun-bilgileri">
+                        <p class="urun-isim">Gümüş Bileklik</p>
+                        <div class="urun-meta">
+                            <span class="renk-gosterge beyaz"></span>
+                            <span class="secenek-sayisi">+3</span>
+                        </div>
+                        <p class="fiyat">350,00 TL</p>
+                    </div>
                 </div>
                 
                 <div class="urun-kart">
-                    <a href="urun-detay.html">
-                        <img src="urun-e.jpg" alt="Ay Fazları Kupa">
-                        <h3>Ay Fazları Kupa</h3>
-                        <p class="fiyat">85,00 TL</p>
+                    <a href="urun-detay.html" class="urun-link">
+                        <div class="urun-gorsel-kapsayici">
+                            <img src="urun-e.jpg" alt="Ay Fazları Kupa">
+                        </div>
                     </a>
-                    <button>Sepete Ekle</button>
+                    <div class="urun-bilgileri">
+                        <p class="urun-isim">Ay Fazları Kupa</p>
+                        <div class="urun-meta">
+                            <span class="renk-gosterge siyah"></span>
+                            <span class="secenek-sayisi">+1</span>
+                        </div>
+                        <p class="fiyat">85,00 TL</p>
+                    </div>
                 </div>
 
                 <div class="urun-kart">
-                    <a href="urun-detay.html">
-                        <img src="urun-f.jpg" alt="Kadife Kutu">
-                        <h3>Kadife Kutu</h3>
-                        <p class="fiyat">180,00 TL</p>
+                    <a href="urun-detay.html" class="urun-link">
+                        <div class="urun-gorsel-kapsayici">
+                            <img src="urun-f.jpg" alt="Kadife Kutu">
+                        </div>
                     </a>
-                    <button>Sepete Ekle</button>
+                    <div class="urun-bilgileri">
+                        <p class="urun-isim">Kadife Kutu</p>
+                        <div class="urun-meta">
+                            <span class="renk-gosterge beyaz"></span>
+                            <span class="secenek-sayisi">+2</span>
+                        </div>
+                        <p class="fiyat">180,00 TL</p>
+                    </div>
                 </div>
 
             </div>
@@ -87,6 +135,18 @@
                 <li><a href="iletisim.html">İLETİŞİM</a></li>
             </ul>
         </nav>
+        
+        <div id="sosyal-medya">
+            <a href="https://www.instagram.com/moon" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.twitter.com/moon" target="_blank" title="X (Twitter)">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/moon" target="_blank" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
     </footer>
 
     <script src="script.js" defer></script> 
