@@ -96,7 +96,7 @@ main {
     display: block; 
 }
 
-/* --- ÜRÜNLER ALANI GENEL STİLİ (MİNİMALİST TEMA) --- */
+/* --- ÜRÜNLER ALANI GENEL STİLİ (4 SÜTUNLU YAPI) --- */
 #urunler-alan {
     width: 95%; 
     max-width: 1300px;
@@ -120,10 +120,12 @@ main {
     justify-content: center; 
 }
 
-/* Tek Bir Ürün Öğesi (Minimalist Kart) */
+/* Tek Bir Ürün Öğesi (4 Sütun için GÜNCEL HESAPLAMA) */
 .urun-kart {
-    flex: 1 1 calc(50% - 7.5px); 
-    max-width: calc(50% - 7.5px); 
+    /* 4 sütun için boşluk hesaplaması: (100% - (3 * 15px gap)) / 4 = 25% - 11.25px */
+    flex: 1 1 calc(25% - 11.25px); 
+    max-width: calc(25% - 11.25px); 
+    
     background-color: transparent; 
     padding: 0;
     border: none; 
@@ -169,7 +171,6 @@ main {
 
 /* --- SOSYAL MEDYA VE FOOTER STİLLERİ --- */
 
-/* Footer yapısını ikonları ve menüyü ayırmak için düzenle */
 footer {
     display: flex;
     flex-direction: column;
@@ -180,12 +181,10 @@ footer {
     margin-top: auto; 
 }
 
-/* Menü Navigasyonu (Footer) */
 footer nav {
     margin-bottom: 15px;
 }
 
-/* İkonların bulunduğu alan */
 #sosyal-medya {
     margin-top: 10px;
     padding-top: 10px;
