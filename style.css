@@ -9,7 +9,9 @@ body {
     background-color: #FFFFFF; /* Beyaz Tema */
     color: #000000; /* Siyah Yazı */
     margin: 0; 
-    padding: 0;
+    /* YENİ: Mobilde alt menü (60px) için varsayılan boşluk */
+    padding: 0 0 60px 0; 
+    
     min-height: 100vh; 
     display: flex;
     flex-direction: column; 
