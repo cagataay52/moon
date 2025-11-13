@@ -169,39 +169,70 @@ main {
     display: none; 
 }
 
-/* --- SOSYAL MEDYA VE FOOTER STİLLERİ --- */
+/* --- ESKİ FOOTER VE SOSYAL MEDYA STİLLERİNİ GİZLEME --- */
 
-footer {
+/* Bu kural, mobil menü aktifken eski footer ve sosyal medya ikonlarını gizler */
+footer, footer nav {
+    display: none;
+}
+
+/* --- YENİ MOBİL NAVİGASYON (TAB BAR) STİLLERİ --- */
+
+/* Mobil Navigasyon Çubuğunun Kendisi */
+#mobil-nav-cubugu {
+    display: none; /* Varsayılan olarak masaüstünde gizli tut */
+    
+    position: fixed; /* Ekranın alt kısmına sabitle */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; 
+    
+    background-color: #000000; /* SİYAH ARKA PLAN */
+    border-top: 1px solid #333333;
+    z-index: 1000;
+    
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-ikon {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 25px 0 15px 0;
-    width: 100%;
-    border-top: 1px solid #EEEEEE; 
-    margin-top: auto; 
-}
-
-footer nav {
-    margin-bottom: 15px;
-}
-
-#sosyal-medya {
-    margin-top: 10px;
-    padding-top: 10px;
-}
-
-#sosyal-medya a {
-    color: #000000;
-    font-size: 1.5em;
-    margin: 0 12px;
     text-decoration: none;
-    transition: color 0.3s;
+    color: #FFFFFF; /* Beyaz ikon/yazı */
+    font-size: 1.1em;
+    flex-grow: 1;
+    padding: 0 5px;
+    height: 100%;
+    justify-content: center;
+    transition: color 0.2s;
 }
 
-#sosyal-medya a:hover {
-    color: #666666;
+.nav-ikon i {
+    font-size: 18px; 
+    margin-bottom: 3px;
 }
 
+.nav-ikon span {
+    font-size: 10px; 
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Merkezi 'MENÜ' yazısı stili */
+.nav-ikon.merkez {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Aktif/Hover stili */
+.nav-ikon.aktif,
+.nav-ikon:hover {
+    color: #DDDDDD; 
+}
 
 /* --- ZORUNLU MİNİMALİST ÜRÜN KARTI EKLEMELERİ --- */
 
@@ -562,7 +593,7 @@ footer nav {
         flex: 1 1 48%;
     }
     
-    /* Footer Menüsünü Dikey Yap */
+    /* Footer Menüsünü Dikey Yap (ARTIK SİLİNDİĞİ İÇİN GEREKSİZ) */
     footer nav ul {
         flex-direction: column;
         gap: 8px; 
