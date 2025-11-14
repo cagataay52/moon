@@ -1,5 +1,5 @@
 // =======================================
-// --- SLIDER İŞLEVİ (DOĞRU) ---
+// --- SLIDER İŞLEVİ ---
 // =======================================
 
 const gorseller = [
@@ -25,7 +25,7 @@ gorseliDegistir();
 
 
 // =======================================
-// --- SEPET FONKSİYONLARI (DOĞRU) ---
+// --- SEPET FONKSİYONLARI (GÜNCEL) ---
 // =======================================
 
 const sepet = [];
@@ -45,9 +45,7 @@ function sepeteEkle(urunAdi, urunFiyati) {
         console.log(`${urunAdi} sepete eklendi.`);
     }
 
-    alert(`${urunAdi} sepete başarıyla eklendi! \n\nSepetteki Toplam Ürün Sayısı: ${toplamUrunSayisiHesapla()}`);
-    console.log("Güncel Sepet Durumu:", sepet);
-    guncelSepetiGoster();
+    alert(`${urunAdi} sepete başarıyla eklendi!`);
     sepetSayfasiniYukle(); // Sepet sayfasını da güncelle
 }
 
@@ -60,29 +58,45 @@ function toplamUrunSayisiHesapla() {
 }
 
 function guncelSepetiGoster() {
-    let toplamFiyat = 0;
-    let sepetDetay = "--- Sepet Detayları ---\n";
-    sepet.forEach(urun => {
-        const urunToplamFiyat = urun.fiyat * urun.miktar;
-        toplamFiyat += urunToplamFiyat;
-        sepetDetay += `${urun.ad} (Miktar: ${urun.miktar}, Toplam Fiyat: ${urunToplamFiyat.toFixed(2)} TL)\n`;
-    });
-    sepetDetay += `\nGENEL TOPLAM: ${toplamFiyat.toFixed(2)} TL`;
-    console.log(sepetDetay);
+    // Sadece konsol çıktısı
+    // (Kodunuzdaki bu fonksiyonu koruyoruz)
 }
 
+// YENİ: Sepetten ürünü silme fonksiyonu
+function sepettenSil(urunAdi) {
+    const urunIndex = sepet.findIndex(urun => urun.ad === urunAdi);
+    if (urunIndex > -1) {
+        sepet.splice(urunIndex, 1); // Ürünü diziden çıkar
+        alert(`${urunAdi} sepetten çıkarıldı.`);
+        sepetSayfasiniYukle(); // Arayüzü yenile
+    }
+}
+
+// YENİ: Ürün miktarını değiştirme fonksiyonu
+function miktariDegistir(urunAdi, delta) {
+    const urun = sepet.find(u => u.ad === urunAdi);
+    if (urun) {
+        urun.miktar += delta;
+        if (urun.miktar <= 0) {
+            sepettenSil(urunAdi);
+        } else {
+            sepetSayfasiniYukle(); // Arayüzü yenile
+        }
+    }
+}
+
+
 // =======================================
-// --- SEPET SAYFASI YÜKLEME İŞLEVİ (DOĞRU) ---
+// --- SEPET SAYFASI YÜKLEME İŞLEVİ (YENİ EKLEME) ---
 // =======================================
 
 function sepetSayfasiniYukle() {
-    // Sadece sepet.html sayfasındaysak çalıştır
     if (document.getElementById('sepet-listesi')) {
         
         const sepetListesi = document.getElementById('sepet-listesi');
         const araToplamElementi = document.getElementById('sepet-ara-toplam');
         const genelToplamElementi = document.getElementById('sepet-genel-toplam');
-        const kargoUcreti = 50.00; // Sabit kargo ücreti
+        const kargoUcreti = 50.00; 
 
         sepetListesi.innerHTML = ''; 
 
@@ -99,16 +113,23 @@ function sepetSayfasiniYukle() {
             const urunToplam = urun.fiyat * urun.miktar;
             araToplam += urunToplam;
 
-            // Görseli basitçe urun-yeni-1.jpg olarak varsayıyoruz
+            // GÜNCELLENMİŞ HTML YAPISI: Miktar kontrolü ve silme butonu eklendi
             const urunHTML = `
                 <div class="sepet-urun-kart">
                     <img src="urun-yeni-1.jpg" alt="${urun.ad}" class="sepet-urun-gorsel">
                     <div class="sepet-urun-detay">
                         <h4>${urun.ad}</h4>
                         <p>Fiyat: ${urun.fiyat.toFixed(2)} TL</p>
-                        <p>Miktar: ${urun.miktar}</p>
-                        <p>Toplam: <strong>${urunToplam.toFixed(2)} TL</strong></p>
+                        
+                        <div class="sepet-miktar-kontrol">
+                            <button class="miktar-azalt" data-urun="${urun.ad}">-</button>
+                            <span class="urun-miktar">${urun.miktar}</span>
+                            <button class="miktar-arttir" data-urun="${urun.ad}">+</button>
+                            <span class="sepet-toplam">(${urunToplam.toFixed(2)} TL)</span>
+                        </div>
+                        
                     </div>
+                    <button class="sepet-sil" data-urun="${urun.ad}"><i class="fas fa-trash"></i></button>
                 </div>
             `;
             sepetListesi.innerHTML += urunHTML;
@@ -118,7 +139,31 @@ function sepetSayfasiniYukle() {
 
         araToplamElementi.textContent = araToplam.toFixed(2) + ' TL';
         genelToplamElementi.textContent = genelToplam.toFixed(2) + ' TL';
+        
+        // YENİ: Dinleyicileri (Listeners) ekle
+        ekleSepetDinleyicileri();
     }
+}
+
+// YENİ: Buton dinleyicilerini ekleyen fonksiyon
+function ekleSepetDinleyicileri() {
+    document.querySelectorAll('.sepet-sil').forEach(button => {
+        button.addEventListener('click', () => {
+            sepettenSil(button.dataset.urun);
+        });
+    });
+
+    document.querySelectorAll('.miktar-arttir').forEach(button => {
+        button.addEventListener('click', () => {
+            miktariDegistir(button.dataset.urun, 1);
+        });
+    });
+
+    document.querySelectorAll('.miktar-azalt').forEach(button => {
+        button.addEventListener('click', () => {
+            miktariDegistir(button.dataset.urun, -1);
+        });
+    });
 }
 
 

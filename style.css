@@ -776,3 +776,75 @@ footer, footer nav {
         order: -1; /* Özeti mobil görünümde listenin üstüne taşır */
     }
 }
+
+/* --- SEPET YÖNETİMİ STİLLERİ --- */
+
+.sepet-urun-kart {
+    display: flex;
+    border-bottom: 1px solid #EEEEEE;
+    padding: 20px 0;
+    align-items: center;
+    position: relative;
+    /* Görsel ve detayın yan yana hizalanması için */
+    justify-content: space-between; 
+}
+
+.sepet-urun-gorsel {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.sepet-urun-detay {
+    flex-grow: 1;
+    margin-right: 15px; 
+}
+
+.sepet-miktar-kontrol {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sepet-miktar-kontrol button {
+    width: 25px;
+    height: 25px;
+    background-color: #F0F0F0;
+    border: 1px solid #CCCCCC;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    border-radius: 0; /* Minimalist görünüm */
+}
+
+.urun-miktar {
+    padding: 0 10px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.sepet-toplam {
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.sepet-sil {
+    background: none;
+    border: none;
+    color: #999999;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 10px;
+    transition: color 0.2s;
+    position: absolute; /* Sepet kartının sağ üstüne sabitlemek için */
+    top: 10px;
+    right: 0;
+}
+
+.sepet-sil:hover {
+    color: #000000;
+}
