@@ -13,7 +13,6 @@ const gorselElementi = document.getElementById('reklam-gorseli');
 const degisimSuresi = 3000;
 
 function gorseliDegistir() {
-    // Sadece anasayfada çalışır
     if(gorselElementi) {
         gorselElementi.src = gorseller[mevcutIndex];
         mevcutIndex++;
@@ -23,7 +22,6 @@ function gorseliDegistir() {
     }
 }
 
-// Görsel elementi varsa intervali başlat
 if(gorselElementi) {
     setInterval(gorseliDegistir, degisimSuresi);
     gorseliDegistir();
@@ -31,13 +29,13 @@ if(gorselElementi) {
 
 
 // =======================================
-// --- SEPET FONKSİYONLARI (GÜNCEL ve KALICI) ---
+// --- SEPET FONKSİYONLARI (KALICI VERİ) ---
 // =======================================
 
 // BAŞLANGIÇ: LocalStorage'dan sepeti yükle veya boş bir dizi oluştur
 let sepet = JSON.parse(localStorage.getItem('alisverisSepeti')) || [];
 
-// YENİ: Sepeti LocalStorage'a kaydetme fonksiyonu
+// Sepeti LocalStorage'a kaydetme fonksiyonu
 function sepetiKaydet() {
     localStorage.setItem('alisverisSepeti', JSON.stringify(sepet));
 }
@@ -47,17 +45,14 @@ function sepeteEkle(urunAdi, urunFiyati) {
 
     if (mevcutUrun) {
         mevcutUrun.miktar++;
-        console.log(`${urunAdi} miktarı artırıldı. Yeni miktar: ${mevcutUrun.miktar}`);
     } else {
         sepet.push({
             ad: urunAdi,
             fiyat: urunFiyati,
             miktar: 1
         });
-        console.log(`${urunAdi} sepete eklendi.`);
     }
 
-    // Her eklemeden sonra kaydet ve arayüzü güncelle
     sepetiKaydet(); 
     alert(`${urunAdi} sepete başarıyla eklendi!`);
     sepetSayfasiniYukle(); 
@@ -80,7 +75,7 @@ function sepettenSil(urunAdi) {
     if (urunIndex > -1) {
         sepet.splice(urunIndex, 1); 
         alert(`${urunAdi} sepetten çıkarıldı.`);
-        sepetiKaydet(); // Silindikten sonra kaydet
+        sepetiKaydet(); 
         sepetSayfasiniYukle(); 
     }
 }
@@ -92,7 +87,7 @@ function miktariDegistir(urunAdi, delta) {
         if (urun.miktar <= 0) {
             sepettenSil(urunAdi);
         } else {
-            sepetiKaydet(); // Miktar değişince kaydet
+            sepetiKaydet(); 
             sepetSayfasiniYukle(); 
         }
     }
@@ -244,10 +239,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
+    // ARA İKONU İŞLEVİ
     if (aramaButonu) {
         aramaButonu.addEventListener('click', (e) => {
             e.preventDefault();
+            
+            // Aktif vurguyu ayarla
             setActiveLink(aramaButonu);
+
+            // Arama kutusuna odaklan ve yukarı kaydır
             const aramaKutusu = document.getElementById('arama-kutusu');
             if (aramaKutusu) {
                  aramaKutusu.focus();
@@ -256,18 +256,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Sepet İkonu: Sepet sayfasına yönlendir
     if (sepetButonu) {
         sepetButonu.addEventListener('click', (e) => {
             e.preventDefault();
-            setActiveLink(sepetButonu); 
+            setActiveLink(sepetButonu); // Sepet ikonunu aktif yap
+            // sepet.html sayfasına yönlendir
             window.location.href = 'sepet.html';
         });
     }
 
+    // Profil İkonu
     if (profilButonu) {
         profilButonu.addEventListener('click', (e) => {
             e.preventDefault();
-            setActiveLink(profilButonu); 
+            setActiveLink(profilButonu); // Profil ikonunu aktif yap
             alert('Hesabım / Giriş Sayfası yükleniyor...');
         });
     }
@@ -295,5 +298,48 @@ document.addEventListener('DOMContentLoaded', () => {
             bedenDugmeleri.forEach(d => d.classList.remove('aktif'));
             dugme.classList.add('aktif');
         });
+    });
+
+    // ----------------------------------------------------
+    // 4. MASAÜSTÜ BURGER MENÜ İŞLEVİ
+    // ----------------------------------------------------
+
+    const burgerIkon = document.getElementById('menu-ac-kapa');
+    const yanMenu = document.getElementById('yan-menu-paneli');
+    const kapatButonu = document.querySelector('#yan-menu-paneli .kapatma-butonu');
+    
+    // Açma İşlevi
+    if (burgerIkon) {
+        burgerIkon.addEventListener('click', () => {
+            if (window.innerWidth > 900) { // Sadece masaüstünde çalış
+                if(yanMenu) yanMenu.classList.add('acik');
+            }
+        });
+    }
+
+    // Kapama İşlevi (Kapat butonuna tıklanınca)
+    if (kapatButonu) {
+        kapatButonu.addEventListener('click', () => {
+            if(yanMenu) yanMenu.classList.remove('acik');
+        });
+    }
+    
+    // Kapama İşlevi (Menü dışına tıklanınca)
+    document.addEventListener('click', (e) => {
+        // Eğer tıklama menünün içinde DEĞİLSE ve burger ikonu DEĞİLSE, kapat
+        const isMenuOpen = yanMenu && yanMenu.classList.contains('acik');
+        const isTargetInsideMenu = yanMenu && yanMenu.contains(e.target);
+        const isTargetBurger = burgerIkon && (e.target === burgerIkon || burgerIkon.contains(e.target));
+        
+        if (isMenuOpen && !isTargetInsideMenu && !isTargetBurger && window.innerWidth > 900) {
+            yanMenu.classList.remove('acik');
+        }
+    });
+
+    // Sayfa boyutlandığında menüyü kapat
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 900 && yanMenu) {
+            yanMenu.classList.remove('acik');
+        }
     });
 });

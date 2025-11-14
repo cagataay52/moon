@@ -19,42 +19,84 @@ body {
 
 /* 1. Üst Bölüm: İsim (M O O N) */
 header {
-    padding: 30px 0;
+    /* BURGER İKONU İÇİN KONUMLANDIRMA AYARI */
+    display: flex;
+    justify-content: space-between; /* İsim ve Arama kutusunu ayır */
+    align-items: center;
+    padding: 30px 40px; /* Kenarlara boşluk */
+    
     font-size: 2em; 
     letter-spacing: 10px; 
     color: #000000; 
     border-bottom: 1px solid #EEEEEE; 
+    position: relative; /* Burger ikonu için konumlandırma */
 }
 
-/* --- YENİ MASAÜSTÜ NAVİGASYON STİLLERİ --- */
+/* --- YENİ BURGER MENÜ İKONU STİLİ (MASAÜSTÜ) --- */
 
-#desktop-nav {
-    display: block; /* KRİTİK: Masaüstünde varsayılan olarak göster */
-    margin-top: 15px;
-    margin-bottom: 25px;
+#menu-ac-kapa {
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    left: 40px; /* Sol kenardan uzaklık */
+    z-index: 2000;
+    transition: transform 0.2s;
+    display: none; /* KRİTİK: Varsayılan olarak gizli tut, sadece Masaüstü medya sorgusunda açılacak */
 }
 
-#desktop-nav ul {
+/* --- YENİ YAN MENÜ PANELİ (SIDE NAV) STİLİ --- */
+
+#yan-menu-paneli {
+    position: fixed;
+    top: 0;
+    left: -320px; /* Başlangıçta tamamen ekranın dışına gizle */
+    width: 300px;
+    height: 100%;
+    background-color: #FFFFFF; /* Beyaz Menü Arka Planı */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1500;
+    padding: 40px 0;
+    transition: left 0.3s ease-in-out;
+    display: none; /* KRİTİK: Varsayılan olarak gizli tut */
+}
+
+/* Menü açıkken pozisyon */
+#yan-menu-paneli.acik {
+    left: 0;
+}
+
+#yan-menu-paneli ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px; 
+    text-align: left;
 }
 
-#desktop-nav ul li a {
+#yan-menu-paneli ul li a {
+    display: block;
+    padding: 15px 40px;
     text-decoration: none;
     color: #000000;
-    font-size: 0.95em;
-    font-weight: 500;
-    letter-spacing: 1px;
-    transition: color 0.2s;
+    font-size: 1.1em;
+    border-bottom: 1px solid #F0F0F0;
+    transition: background-color 0.2s;
 }
 
-#desktop-nav ul li a:hover {
-    color: #666666;
+#yan-menu-paneli ul li a:hover {
+    background-color: #F8F8F8;
 }
+
+.kapatma-butonu {
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #000000;
+}
+
+
 /* --- ARAMA ÇUBUĞU STİLLERİ --- */
 #arama-cubugu {
     width: 100%;
@@ -152,6 +194,7 @@ main {
 
 /* Tek Bir Ürün Öğesi (4 Sütun için GÜNCEL HESAPLAMA) */
 .urun-kart {
+    /* 4 sütun için boşluk hesaplaması: (100% - (3 * 15px gap)) / 4 = 25% - 11.25px */
     flex: 1 1 calc(25% - 11.25px); 
     max-width: calc(25% - 11.25px); 
     
@@ -200,7 +243,6 @@ main {
 
 /* --- ESKİ FOOTER VE SOSYAL MEDYA STİLLERİNİ GİZLEME --- */
 
-/* Bu kural, mobil menü aktifken eski footer ve sosyal medya ikonlarını gizler */
 footer, footer nav {
     display: none;
 }
@@ -687,6 +729,10 @@ footer, footer nav {
     #desktop-nav {
         display: none !important;
     }
+    /* KRİTİK: Burger İkonunu ve yan menüsünü mobilde gizle */
+    #menu-ac-kapa, #yan-menu-paneli {
+        display: none !important;
+    }
     
     /* YENİ: Mobilde sabit menü için alt boşluk */
     body {
@@ -730,7 +776,7 @@ footer, footer nav {
     
     /* Mobil Menüyü Göster */
     #mobil-nav-cubugu {
-        display: flex; 
+        display: flex !important; 
     }
 }
 
