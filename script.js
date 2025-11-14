@@ -16,7 +16,7 @@ function gorseliDegistir() {
     gorselElementi.src = gorseller[mevcutIndex];
     mevcutIndex++;
     if (mevcutIndex >= gorseller.length) {
-        mevcutIndex = 0; // Hata düzeltildi: mevcuttIndex -> mevcutIndex
+        mevcutIndex = 0;
     }
 }
 
@@ -48,6 +48,7 @@ function sepeteEkle(urunAdi, urunFiyati) {
     alert(`${urunAdi} sepete başarıyla eklendi! \n\nSepetteki Toplam Ürün Sayısı: ${toplamUrunSayisiHesapla()}`);
     console.log("Güncel Sepet Durumu:", sepet);
     guncelSepetiGoster();
+    sepetSayfasiniYukle(); // Sepet sayfasını da güncelle
 }
 
 function toplamUrunSayisiHesapla() {
@@ -70,12 +71,66 @@ function guncelSepetiGoster() {
     console.log(sepetDetay);
 }
 
+// =======================================
+// --- SEPET SAYFASI YÜKLEME İŞLEVİ (YENİ EKLENTİ) ---
+// =======================================
+
+function sepetSayfasiniYukle() {
+    // Sadece sepet.html sayfasındaysak çalıştır
+    if (document.getElementById('sepet-listesi')) {
+        
+        const sepetListesi = document.getElementById('sepet-listesi');
+        const araToplamElementi = document.getElementById('sepet-ara-toplam');
+        const genelToplamElementi = document.getElementById('sepet-genel-toplam');
+        const kargoUcreti = 50.00; // Sabit kargo ücreti
+
+        // Listeyi temizle
+        sepetListesi.innerHTML = ''; 
+
+        if (sepet.length === 0) {
+            sepetListesi.innerHTML = '<p class="sepet-uyari">Sepetinizde ürün bulunmamaktadır. Hemen alışverişe başlayın!</p>';
+            araToplamElementi.textContent = '0.00 TL';
+            genelToplamElementi.textContent = '0.00 TL';
+            return;
+        }
+
+        let araToplam = 0;
+
+        sepet.forEach(urun => {
+            const urunToplam = urun.fiyat * urun.miktar;
+            araToplam += urunToplam;
+
+            // Görseli basitçe urun-yeni-X.jpg olarak varsayıyoruz
+            const urunHTML = `
+                <div class="sepet-urun-kart">
+                    <img src="urun-yeni-1.jpg" alt="${urun.ad}" class="sepet-urun-gorsel">
+                    <div class="sepet-urun-detay">
+                        <h4>${urun.ad}</h4>
+                        <p>Fiyat: ${urun.fiyat.toFixed(2)} TL</p>
+                        <p>Miktar: ${urun.miktar}</p>
+                        <p>Toplam: <strong>${urunToplam.toFixed(2)} TL</strong></p>
+                    </div>
+                </div>
+            `;
+            sepetListesi.innerHTML += urunHTML;
+        });
+
+        const genelToplam = araToplam + kargoUcreti;
+
+        araToplamElementi.textContent = araToplam.toFixed(2) + ' TL';
+        genelToplamElementi.textContent = genelToplam.toFixed(2) + ' TL';
+    }
+}
+
 
 // =======================================
-// --- ÜRÜN KARTI VE SEPET ETKİLEŞİMİ ---
+// --- TÜM SAYFALAR İÇİN GENEL ETKİLEŞİMLER ---
 // =======================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // Sayfa yüklendiğinde sepet içeriğini yükle (sadece sepet sayfasındaysa çalışır)
+    sepetSayfasiniYukle(); 
     
     // ----------------------------------------------------
     // 1. ÜRÜN KARTI (+) BUTONU İŞLEVİ (MİNİMALİST TASARIM)
@@ -91,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const clickX = event.clientX;
             const clickY = event.clientY;
             
-            // Sepet Butonu Alanı: Sağ alt köşeden 40px x 40px'lik bir alan hedefle (CSS'teki '+' ikonunun boyutuna göre)
+            // Sepet Butonu Alanı: Sağ alt köşeden 40px x 40px'lik bir alan hedefle
             const isNearPlusButton = 
                 clickX > (rect.right - 40) && 
                 clickY > (rect.bottom - 40);
@@ -119,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ----------------------------------------------------
-    // 2. MOBİL NAVİGASYON ETKİLEŞİMLERİ (YENİ EKLENTİ)
+    // 2. MOBİL NAVİGASYON ETKİLEŞİMLERİ 
     // ----------------------------------------------------
 
     const aramaButonu = document.querySelector('#mobil-nav-cubugu a[href="#arama"]');
@@ -129,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (aramaButonu) {
         aramaButonu.addEventListener('click', (e) => {
             e.preventDefault();
-            // Mobil menüden tıklanınca üstteki arama kutusuna odaklan
             const aramaKutusu = document.getElementById('arama-kutusu');
             if (aramaKutusu) {
                  aramaKutusu.focus();
@@ -145,10 +199,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    // Sepet İkonu: Sepet sayfasına yönlendir
     if (sepetButonu) {
         sepetButonu.addEventListener('click', (e) => {
             e.preventDefault();
-            alert('Sepet Sayfası (Detaylı Ödeme Akışı) yükleniyor...');
+            // sepet.html sayfasına yönlendir
+            window.location.href = 'sepet.html';
         });
     }
 

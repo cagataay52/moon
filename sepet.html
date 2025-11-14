@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon | Sepetim</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>SEPETİM</h1>
+        <div id="arama-cubugu">
+            <input type="text" id="arama-kutusu" placeholder="Ürün Ara...">
+            <button id="arama-butonu">Ara</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="sepet-icerik-alani">
+            <h2>Alışveriş Sepetiniz</h2>
+            
+            <div id="sepet-listesi">
+                <p class="sepet-uyari">Sepetinizde ürün bulunmamaktadır. Hemen alışverişe başlayın!</p>
+            </div>
+
+            <div id="sepet-ozet">
+                <h3>Sepet Özeti</h3>
+                <p>Ara Toplam: <span id="sepet-ara-toplam">0.00 TL</span></p>
+                <p class="kargo-bilgi">Kargo Ücreti: <span id="sepet-kargo">50.00 TL</span></p>
+                <h3 class="toplam-baslik">GENEL TOPLAM: <span id="sepet-genel-toplam">50.00 TL</span></h3>
+                
+                <button id="odeme-butonu">ÖDEMEYE GEÇ</button>
+                <a href="projeler.html" class="alisveris-devam-et">Alışverişe Devam Et</a>
+            </div>
+            
+        </section>
+    </main>
+
+    <div id="mobil-nav-cubugu">
+        <a href="index.html" class="nav-ikon" title="Anasayfa">
+            <i class="fas fa-home"></i>
+            <span>ANA SAYFA</span>
+        </a>
+        <a href="#arama" class="nav-ikon" title="Arama">
+            <i class="fas fa-search"></i>
+            <span>ARA</span>
+        </a>
+        <a href="projeler.html" class="nav-ikon merkez" title="Menü">
+            <span>MENÜ</span>
+        </a>
+        <a href="sepet.html" class="nav-ikon aktif" title="Sepet">
+            <i class="fas fa-shopping-bag"></i>
+            <span>SEPET</span>
+        </a>
+        <a href="#profil" class="nav-ikon" title="Hesabım">
+            <i class="fas fa-user"></i>
+            <span>HESABIM</span>
+        </a>
+    </div>
+
+</body>
+</html>
