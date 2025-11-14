@@ -1,5 +1,5 @@
 // =======================================
-// --- SLIDER İŞLEVİ (YAZIM HATASI DÜZELTİLDİ) ---
+// --- SLIDER İŞLEVİ (DOĞRU) ---
 // =======================================
 
 const gorseller = [
@@ -8,7 +8,7 @@ const gorseller = [
     "gorsel-3.jpg"
 ];
 
-let mevcutIndex = 0; // Doğru değişken adı
+let mevcutIndex = 0;
 const gorselElementi = document.getElementById('reklam-gorseli');
 const degisimSuresi = 3000;
 
@@ -72,7 +72,7 @@ function guncelSepetiGoster() {
 }
 
 // =======================================
-// --- SEPET SAYFASI YÜKLEME İŞLEVİ (YENİ EKLENTİ) ---
+// --- SEPET SAYFASI YÜKLEME İŞLEVİ (DOĞRU) ---
 // =======================================
 
 function sepetSayfasiniYukle() {
@@ -84,7 +84,6 @@ function sepetSayfasiniYukle() {
         const genelToplamElementi = document.getElementById('sepet-genel-toplam');
         const kargoUcreti = 50.00; // Sabit kargo ücreti
 
-        // Listeyi temizle
         sepetListesi.innerHTML = ''; 
 
         if (sepet.length === 0) {
@@ -100,7 +99,7 @@ function sepetSayfasiniYukle() {
             const urunToplam = urun.fiyat * urun.miktar;
             araToplam += urunToplam;
 
-            // Görseli basitçe urun-yeni-X.jpg olarak varsayıyoruz
+            // Görseli basitçe urun-yeni-1.jpg olarak varsayıyoruz
             const urunHTML = `
                 <div class="sepet-urun-kart">
                     <img src="urun-yeni-1.jpg" alt="${urun.ad}" class="sepet-urun-gorsel">
@@ -174,40 +173,60 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ----------------------------------------------------
-    // 2. MOBİL NAVİGASYON ETKİLEŞİMLERİ 
+    // 2. MOBİL NAVİGASYON ETKİLEŞİMLERİ (GÜNCELLENDİ)
     // ----------------------------------------------------
-
+    
+    const mobilNavCubugu = document.getElementById('mobil-nav-cubugu');
     const aramaButonu = document.querySelector('#mobil-nav-cubugu a[href="#arama"]');
     const profilButonu = document.querySelector('#mobil-nav-cubugu a[href="#profil"]');
     const sepetButonu = document.querySelector('#mobil-nav-cubugu a[href="#sepet"]');
 
+    // AKTİF VURGU FONKSİYONU
+    const setActiveLink = (element) => {
+        if (mobilNavCubugu) {
+            mobilNavCubugu.querySelectorAll('.nav-ikon').forEach(ikon => {
+                ikon.classList.remove('aktif');
+            });
+            element.classList.add('aktif');
+        }
+    };
+    
+    // ARA İKONU İŞLEVİ
     if (aramaButonu) {
         aramaButonu.addEventListener('click', (e) => {
             e.preventDefault();
+            
+            // Aktif vurguyu ayarla
+            setActiveLink(aramaButonu);
+
+            // Arama kutusuna odaklan ve yukarı kaydır
             const aramaKutusu = document.getElementById('arama-kutusu');
             if (aramaKutusu) {
                  aramaKutusu.focus();
+                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-            alert('Arama ikonuna tıklandı! Lütfen üstteki kutuyu kullanın.');
         });
     }
 
-    if (profilButonu) {
-        profilButonu.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Hesabım / Giriş Sayfası yükleniyor...');
-        });
-    }
-    
     // Sepet İkonu: Sepet sayfasına yönlendir
     if (sepetButonu) {
         sepetButonu.addEventListener('click', (e) => {
             e.preventDefault();
+            setActiveLink(sepetButonu); // Sepet ikonunu aktif yap
             // sepet.html sayfasına yönlendir
             window.location.href = 'sepet.html';
         });
     }
 
+    // Profil İkonu
+    if (profilButonu) {
+        profilButonu.addEventListener('click', (e) => {
+            e.preventDefault();
+            setActiveLink(profilButonu); // Profil ikonunu aktif yap
+            alert('Hesabım / Giriş Sayfası yükleniyor...');
+        });
+    }
+    
     // ----------------------------------------------------
     // 3. ÜRÜN DETAY SEÇENEK YÖNETİMİ
     // ----------------------------------------------------
