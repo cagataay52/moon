@@ -9,7 +9,7 @@ body {
     background-color: #FFFFFF; /* Beyaz Tema */
     color: #000000; /* Siyah Yazı */
     margin: 0; 
-    /* KRİTİK DÜZELTME: Mobilde alt menü (60px) için sabit boşluk */
+    /* KRİTİK DÜZELTME: Mobilde alt menü (60px) için varsayılan sabit boşluk */
     padding: 0 0 60px 0; 
     
     min-height: 100vh; 
@@ -174,7 +174,6 @@ main {
 /* --- ESKİ FOOTER VE SOSYAL MEDYA STİLLERİNİ GİZLEME --- */
 
 /* Bu kural, mobil menü aktifken eski footer ve sosyal medya ikonlarını gizler */
-/* Bu blok, mobil menü aktifken eski navigasyonu tamamen kapatır */
 footer, footer nav {
     display: none;
 }

@@ -72,17 +72,19 @@ function guncelSepetiGoster() {
 
 
 // =======================================
-// --- YENİ SEPET ETKİLEŞİMİ (DOĞRU VE GÜVENİLİR YÖNTEM) ---
+// --- ÜRÜN KARTI VE SEPET ETKİLEŞİMİ ---
 // =======================================
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Tüm görsel kapsayıcılarını seç
+    // ----------------------------------------------------
+    // 1. ÜRÜN KARTI (+) BUTONU İŞLEVİ (MİNİMALİST TASARIM)
+    // ----------------------------------------------------
+
     const gorselKapsayicilar = document.querySelectorAll('.urun-gorsel-kapsayici');
 
     gorselKapsayicilar.forEach(kapsayici => {
         
-        // Tıklama olayını görsel kapsayıcıda dinle
         kapsayici.addEventListener('click', (event) => {
             
             const rect = kapsayici.getBoundingClientRect();
@@ -96,30 +98,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (isNearPlusButton) {
                 
-                // Link navigasyonunu durdur (Detay sayfasına gitmesin)
                 event.preventDefault();
-                event.stopPropagation(); // Olayın diğer elementlere sıçramasını engelle
+                event.stopPropagation();
                 
-                // Ürün bilgilerini HTML yapısından çek
                 const urunKart = kapsayici.closest('.urun-kart');
                 
-                // Hata Kontrolü: Bu seçicilerin (urun-isim, fiyat) var olduğundan emin ol
                 const urunAdi = urunKart.querySelector('.urun-isim') ? urunKart.querySelector('.urun-isim').textContent.trim() : 'Bilinmeyen Ürün';
                 let urunFiyatiMetin = urunKart.querySelector('.fiyat') ? urunKart.querySelector('.fiyat').textContent.trim() : '0 TL';
                 
-                // Fiyatı sayıya çevir
                 urunFiyatiMetin = urunFiyatiMetin.replace(' TL', '').replace(',', '.');
                 const urunFiyati = parseFloat(urunFiyatiMetin);
 
-                // Sepete ekleme fonksiyonunu çağır
                 if (!isNaN(urunFiyati)) {
                     sepeteEkle(urunAdi, urunFiyati);
                 } else {
                     console.error('Hata: Ürün fiyatı belirlenemedi.');
                 }
             }
-            // Eğer '+' butonuna yakın bir yere tıklanmadıysa, 
-            // varsayılan davranış (ürün detay sayfasına gitmek) gerçekleşecektir.
+        });
+    });
+
+    // ----------------------------------------------------
+    // 2. MOBİL NAVİGASYON ETKİLEŞİMLERİ (YENİ EKLENTİ)
+    // ----------------------------------------------------
+
+    const aramaButonu = document.querySelector('#mobil-nav-cubugu a[href="#arama"]');
+    const profilButonu = document.querySelector('#mobil-nav-cubugu a[href="#profil"]');
+    const sepetButonu = document.querySelector('#mobil-nav-cubugu a[href="#sepet"]');
+
+    if (aramaButonu) {
+        aramaButonu.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Mobil menüden tıklanınca üstteki arama kutusuna odaklan
+            const aramaKutusu = document.getElementById('arama-kutusu');
+            if (aramaKutusu) {
+                 aramaKutusu.focus();
+            }
+            alert('Arama ikonuna tıklandı! Lütfen üstteki kutuyu kullanın.');
+        });
+    }
+
+    if (profilButonu) {
+        profilButonu.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Hesabım / Giriş Sayfası yükleniyor...');
+        });
+    }
+    
+    if (sepetButonu) {
+        sepetButonu.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Sepet Sayfası (Detaylı Ödeme Akışı) yükleniyor...');
+        });
+    }
+
+    // ----------------------------------------------------
+    // 3. ÜRÜN DETAY SEÇENEK YÖNETİMİ
+    // ----------------------------------------------------
+
+    const renkNoktalari = document.querySelectorAll('.renk-nokta');
+    const secilenRenkGosterge = document.getElementById('secilen-renk');
+    const bedenDugmeleri = document.querySelectorAll('.beden-dugme');
+
+    renkNoktalari.forEach(nokta => {
+        nokta.addEventListener('click', () => {
+            renkNoktalari.forEach(n => n.classList.remove('aktif'));
+            nokta.classList.add('aktif');
+            if (secilenRenkGosterge) {
+                secilenRenkGosterge.textContent = nokta.dataset.renk;
+            }
+        });
+    });
+
+    bedenDugmeleri.forEach(dugme => {
+        dugme.addEventListener('click', () => {
+            bedenDugmeleri.forEach(d => d.classList.remove('aktif'));
+            dugme.classList.add('aktif');
         });
     });
 });
