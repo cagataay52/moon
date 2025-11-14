@@ -13,22 +13,34 @@ const gorselElementi = document.getElementById('reklam-gorseli');
 const degisimSuresi = 3000;
 
 function gorseliDegistir() {
-    gorselElementi.src = gorseller[mevcutIndex];
-    mevcutIndex++;
-    if (mevcutIndex >= gorseller.length) {
-        mevcutIndex = 0;
+    // Sadece anasayfada çalışır
+    if(gorselElementi) {
+        gorselElementi.src = gorseller[mevcutIndex];
+        mevcutIndex++;
+        if (mevcutIndex >= gorseller.length) {
+            mevcutIndex = 0;
+        }
     }
 }
 
-setInterval(gorseliDegistir, degisimSuresi);
-gorseliDegistir();
+// Görsel elementi varsa intervali başlat
+if(gorselElementi) {
+    setInterval(gorseliDegistir, degisimSuresi);
+    gorseliDegistir();
+}
 
 
 // =======================================
-// --- SEPET FONKSİYONLARI (GÜNCEL) ---
+// --- SEPET FONKSİYONLARI (GÜNCEL ve KALICI) ---
 // =======================================
 
-const sepet = [];
+// BAŞLANGIÇ: LocalStorage'dan sepeti yükle veya boş bir dizi oluştur
+let sepet = JSON.parse(localStorage.getItem('alisverisSepeti')) || [];
+
+// YENİ: Sepeti LocalStorage'a kaydetme fonksiyonu
+function sepetiKaydet() {
+    localStorage.setItem('alisverisSepeti', JSON.stringify(sepet));
+}
 
 function sepeteEkle(urunAdi, urunFiyati) {
     const mevcutUrun = sepet.find(urun => urun.ad === urunAdi);
@@ -45,8 +57,10 @@ function sepeteEkle(urunAdi, urunFiyati) {
         console.log(`${urunAdi} sepete eklendi.`);
     }
 
+    // Her eklemeden sonra kaydet ve arayüzü güncelle
+    sepetiKaydet(); 
     alert(`${urunAdi} sepete başarıyla eklendi!`);
-    sepetSayfasiniYukle(); // Sepet sayfasını da güncelle
+    sepetSayfasiniYukle(); 
 }
 
 function toplamUrunSayisiHesapla() {
@@ -58,21 +72,19 @@ function toplamUrunSayisiHesapla() {
 }
 
 function guncelSepetiGoster() {
-    // Sadece konsol çıktısı
-    // (Kodunuzdaki bu fonksiyonu koruyoruz)
+    // (Konsol çıktısı fonksiyonu)
 }
 
-// YENİ: Sepetten ürünü silme fonksiyonu
 function sepettenSil(urunAdi) {
     const urunIndex = sepet.findIndex(urun => urun.ad === urunAdi);
     if (urunIndex > -1) {
-        sepet.splice(urunIndex, 1); // Ürünü diziden çıkar
+        sepet.splice(urunIndex, 1); 
         alert(`${urunAdi} sepetten çıkarıldı.`);
-        sepetSayfasiniYukle(); // Arayüzü yenile
+        sepetiKaydet(); // Silindikten sonra kaydet
+        sepetSayfasiniYukle(); 
     }
 }
 
-// YENİ: Ürün miktarını değiştirme fonksiyonu
 function miktariDegistir(urunAdi, delta) {
     const urun = sepet.find(u => u.ad === urunAdi);
     if (urun) {
@@ -80,14 +92,15 @@ function miktariDegistir(urunAdi, delta) {
         if (urun.miktar <= 0) {
             sepettenSil(urunAdi);
         } else {
-            sepetSayfasiniYukle(); // Arayüzü yenile
+            sepetiKaydet(); // Miktar değişince kaydet
+            sepetSayfasiniYukle(); 
         }
     }
 }
 
 
 // =======================================
-// --- SEPET SAYFASI YÜKLEME İŞLEVİ (YENİ EKLEME) ---
+// --- SEPET SAYFASI YÜKLEME İŞLEVİ ---
 // =======================================
 
 function sepetSayfasiniYukle() {
@@ -113,7 +126,6 @@ function sepetSayfasiniYukle() {
             const urunToplam = urun.fiyat * urun.miktar;
             araToplam += urunToplam;
 
-            // GÜNCELLENMİŞ HTML YAPISI: Miktar kontrolü ve silme butonu eklendi
             const urunHTML = `
                 <div class="sepet-urun-kart">
                     <img src="urun-yeni-1.jpg" alt="${urun.ad}" class="sepet-urun-gorsel">
@@ -140,12 +152,10 @@ function sepetSayfasiniYukle() {
         araToplamElementi.textContent = araToplam.toFixed(2) + ' TL';
         genelToplamElementi.textContent = genelToplam.toFixed(2) + ' TL';
         
-        // YENİ: Dinleyicileri (Listeners) ekle
         ekleSepetDinleyicileri();
     }
 }
 
-// YENİ: Buton dinleyicilerini ekleyen fonksiyon
 function ekleSepetDinleyicileri() {
     document.querySelectorAll('.sepet-sil').forEach(button => {
         button.addEventListener('click', () => {
@@ -173,11 +183,11 @@ function ekleSepetDinleyicileri() {
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Sayfa yüklendiğinde sepet içeriğini yükle (sadece sepet sayfasındaysa çalışır)
+    // Sepeti LocalStorage'dan yükledikten sonra, sepet sayfasındaysa listele
     sepetSayfasiniYukle(); 
     
     // ----------------------------------------------------
-    // 1. ÜRÜN KARTI (+) BUTONU İŞLEVİ (MİNİMALİST TASARIM)
+    // 1. ÜRÜN KARTI (+) BUTONU İŞLEVİ
     // ----------------------------------------------------
 
     const gorselKapsayicilar = document.querySelectorAll('.urun-gorsel-kapsayici');
@@ -190,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const clickX = event.clientX;
             const clickY = event.clientY;
             
-            // Sepet Butonu Alanı: Sağ alt köşeden 40px x 40px'lik bir alan hedefle
             const isNearPlusButton = 
                 clickX > (rect.right - 40) && 
                 clickY > (rect.bottom - 40);
@@ -218,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ----------------------------------------------------
-    // 2. MOBİL NAVİGASYON ETKİLEŞİMLERİ (GÜNCELLENDİ)
+    // 2. MOBİL NAVİGASYON ETKİLEŞİMLERİ 
     // ----------------------------------------------------
     
     const mobilNavCubugu = document.getElementById('mobil-nav-cubugu');
@@ -226,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const profilButonu = document.querySelector('#mobil-nav-cubugu a[href="#profil"]');
     const sepetButonu = document.querySelector('#mobil-nav-cubugu a[href="#sepet"]');
 
-    // AKTİF VURGU FONKSİYONU
     const setActiveLink = (element) => {
         if (mobilNavCubugu) {
             mobilNavCubugu.querySelectorAll('.nav-ikon').forEach(ikon => {
@@ -236,15 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // ARA İKONU İŞLEVİ
     if (aramaButonu) {
         aramaButonu.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // Aktif vurguyu ayarla
             setActiveLink(aramaButonu);
-
-            // Arama kutusuna odaklan ve yukarı kaydır
             const aramaKutusu = document.getElementById('arama-kutusu');
             if (aramaKutusu) {
                  aramaKutusu.focus();
@@ -253,21 +256,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Sepet İkonu: Sepet sayfasına yönlendir
     if (sepetButonu) {
         sepetButonu.addEventListener('click', (e) => {
             e.preventDefault();
-            setActiveLink(sepetButonu); // Sepet ikonunu aktif yap
-            // sepet.html sayfasına yönlendir
+            setActiveLink(sepetButonu); 
             window.location.href = 'sepet.html';
         });
     }
 
-    // Profil İkonu
     if (profilButonu) {
         profilButonu.addEventListener('click', (e) => {
             e.preventDefault();
-            setActiveLink(profilButonu); // Profil ikonunu aktif yap
+            setActiveLink(profilButonu); 
             alert('Hesabım / Giriş Sayfası yükleniyor...');
         });
     }
