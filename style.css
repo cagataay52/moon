@@ -9,8 +9,7 @@ body {
     background-color: #FFFFFF; /* Beyaz Tema */
     color: #000000; /* Siyah Yazı */
     margin: 0; 
-    /* KRİTİK DÜZELTME: Mobilde alt menü (60px) için varsayılan sabit boşluk */
-    padding: 0 0 60px 0; 
+    padding: 0 0 60px 0; /* Mobilde alt menü (60px) için varsayılan sabit boşluk */
     
     min-height: 100vh; 
     display: flex;
@@ -27,6 +26,35 @@ header {
     border-bottom: 1px solid #EEEEEE; 
 }
 
+/* --- YENİ MASAÜSTÜ NAVİGASYON STİLLERİ --- */
+
+#desktop-nav {
+    display: block; /* KRİTİK: Masaüstünde varsayılan olarak göster */
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+#desktop-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px; 
+}
+
+#desktop-nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 0.95em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+}
+
+#desktop-nav ul li a:hover {
+    color: #666666;
+}
 /* --- ARAMA ÇUBUĞU STİLLERİ --- */
 #arama-cubugu {
     width: 100%;
@@ -124,7 +152,6 @@ main {
 
 /* Tek Bir Ürün Öğesi (4 Sütun için GÜNCEL HESAPLAMA) */
 .urun-kart {
-    /* 4 sütun için boşluk hesaplaması: (100% - (3 * 15px gap)) / 4 = 25% - 11.25px */
     flex: 1 1 calc(25% - 11.25px); 
     max-width: calc(25% - 11.25px); 
     
@@ -578,11 +605,88 @@ footer, footer nav {
     border-color: #000000;
 }
 
+/* --- SEPET YÖNETİMİ STİLLERİ --- */
+
+.sepet-urun-kart {
+    display: flex;
+    border-bottom: 1px solid #EEEEEE;
+    padding: 20px 0;
+    align-items: center;
+    position: relative;
+    /* Görsel ve detayın yan yana hizalanması için */
+    justify-content: space-between; 
+}
+
+.sepet-urun-gorsel {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.sepet-urun-detay {
+    flex-grow: 1;
+    margin-right: 15px; 
+}
+
+.sepet-miktar-kontrol {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sepet-miktar-kontrol button {
+    width: 25px;
+    height: 25px;
+    background-color: #F0F0F0;
+    border: 1px solid #CCCCCC;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    border-radius: 0; /* Minimalist görünüm */
+}
+
+.urun-miktar {
+    padding: 0 10px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.sepet-toplam {
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.sepet-sil {
+    background: none;
+    border: none;
+    color: #999999;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 10px;
+    transition: color 0.2s;
+    position: absolute; /* Sepet kartının sağ üstüne sabitlemek için */
+    top: 10px;
+    right: 0;
+}
+
+.sepet-sil:hover {
+    color: #000000;
+}
+
 /* ======================================= */
 /* --- MOBİL UYUM (RESPONSIVE) STİLLERİ --- */
 /* ======================================= */
 
 @media (max-width: 900px) {
+    
+    /* KRİTİK: Masaüstü navigasyonunu mobilde gizle */
+    #desktop-nav {
+        display: none !important;
+    }
     
     /* YENİ: Mobilde sabit menü için alt boşluk */
     body {
@@ -656,195 +760,4 @@ footer, footer nav {
         font-size: 0.85em;
         font-weight: 700;
     }
-}
-
-/* --- SEPET SAYFASI STİLLERİ --- */
-
-#sepet-icerik-alani {
-    width: 90%;
-    max-width: 1100px;
-    margin: 50px auto;
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    text-align: left;
-}
-
-#sepet-icerik-alani h2 {
-    font-size: 1.8em;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: #000000;
-}
-
-#sepet-listesi {
-    flex-basis: 65%; /* Sepet listesi alanın %65'ini kaplasın */
-}
-
-.sepet-uyari {
-    padding: 20px;
-    border: 1px solid #CCCCCC;
-    text-align: center;
-    color: #333333;
-}
-
-/* Ürün kartı stilini sepet listesi için kullan (varsa) */
-.sepet-urun-kart {
-    display: flex;
-    border-bottom: 1px solid #EEEEEE;
-    padding: 20px 0;
-    align-items: center;
-    position: relative;
-}
-
-.sepet-urun-gorsel {
-    width: 80px;
-    height: 100px;
-    object-fit: cover;
-    margin-right: 20px;
-}
-
-.sepet-urun-detay {
-    flex-grow: 1;
-}
-
-.sepet-urun-detay h4 {
-    margin: 0 0 5px 0;
-    font-size: 1em;
-}
-
-.sepet-urun-detay p {
-    margin: 0;
-    font-size: 0.9em;
-    color: #666666;
-}
-
-/* Sepet Özeti Alanı */
-#sepet-ozet {
-    flex-basis: 30%; /* Sepet özeti alanın %30'unu kaplasın */
-    padding: 20px;
-    border: 1px solid #CCCCCC;
-    background-color: #F8F8F8;
-    height: fit-content;
-}
-
-#sepet-ozet h3 {
-    margin-top: 10px;
-    margin-bottom: 15px;
-    font-size: 1.1em;
-}
-
-#sepet-ara-toplam, #sepet-kargo, #sepet-genel-toplam {
-    font-weight: 700;
-}
-
-.toplam-baslik {
-    margin-top: 20px !important;
-    padding-top: 10px;
-    border-top: 1px solid #CCCCCC;
-    font-size: 1.3em !important;
-}
-
-#odeme-butonu {
-    width: 100%;
-    background-color: #000000;
-    color: #FFFFFF;
-    border: none;
-    padding: 15px;
-    font-weight: bold;
-    font-size: 1.1em;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s;
-}
-
-.alisveris-devam-et {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    color: #666666;
-    text-decoration: none;
-    font-size: 0.9em;
-}
-
-/* Mobil Görünüm İçin Alt Alta Sıralama */
-@media (max-width: 768px) {
-    #sepet-icerik-alani {
-        flex-direction: column;
-    }
-    #sepet-ozet {
-        order: -1; /* Özeti mobil görünümde listenin üstüne taşır */
-    }
-}
-
-/* --- SEPET YÖNETİMİ STİLLERİ --- */
-
-.sepet-urun-kart {
-    display: flex;
-    border-bottom: 1px solid #EEEEEE;
-    padding: 20px 0;
-    align-items: center;
-    position: relative;
-    /* Görsel ve detayın yan yana hizalanması için */
-    justify-content: space-between; 
-}
-
-.sepet-urun-gorsel {
-    width: 80px;
-    height: 100px;
-    object-fit: cover;
-    margin-right: 20px;
-}
-
-.sepet-urun-detay {
-    flex-grow: 1;
-    margin-right: 15px; 
-}
-
-.sepet-miktar-kontrol {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.sepet-miktar-kontrol button {
-    width: 25px;
-    height: 25px;
-    background-color: #F0F0F0;
-    border: 1px solid #CCCCCC;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 1;
-    padding: 0;
-    border-radius: 0; /* Minimalist görünüm */
-}
-
-.urun-miktar {
-    padding: 0 10px;
-    font-weight: 700;
-    font-size: 15px;
-}
-
-.sepet-toplam {
-    margin-left: 20px;
-    font-weight: 600;
-    font-size: 1em;
-}
-
-.sepet-sil {
-    background: none;
-    border: none;
-    color: #999999;
-    cursor: pointer;
-    font-size: 1.2em;
-    padding: 10px;
-    transition: color 0.2s;
-    position: absolute; /* Sepet kartının sağ üstüne sabitlemek için */
-    top: 10px;
-    right: 0;
-}
-
-.sepet-sil:hover {
-    color: #000000;
 }
