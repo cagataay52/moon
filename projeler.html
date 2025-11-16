@@ -16,7 +16,7 @@
         <i class="fas fa-bars"></i>
     </div>
     
-    <h1>M O O N</h1>
+    <h1>TÜM KOLEKSİYONLAR</h1>
     
     <div id="arama-cubugu">
         <input type="text" id="arama-kutusu" placeholder="Ürün Ara...">
@@ -39,6 +39,39 @@
         <section id="tum-urunler-alani">
             <h2>KATEGORİ: POPÜLER</h2>
             
+            <div id="filtre-sirala-cubugu">
+                
+                <div class="filtre-grup">
+                    <label for="sirala">Sırala:</label>
+                    <select id="sirala">
+                        <option value="default">Varsayılan</option>
+                        <option value="fiyat-dusuk">Fiyat (En Düşük)</option>
+                        <option value="fiyat-yuksek">Fiyat (En Yüksek)</option>
+                        <option value="ad-a-z">İsim (A-Z)</option>
+                    </select>
+                </div>
+                
+                <div class="filtre-grup">
+                    <label for="renk">Renk:</label>
+                    <select id="renk">
+                        <option value="all">Tümü</option>
+                        <option value="siyah">Siyah</option>
+                        <option value="beyaz">Beyaz</option>
+                        <option value="mavi">Mavi</option>
+                    </select>
+                </div>
+
+                <div class="filtre-grup">
+                    <label for="kategori">Kategori:</label>
+                    <select id="kategori">
+                        <option value="all">Tümü</option>
+                        <option value="pantolon">Pantolon</option>
+                        <option value="ust">Üst Giyim</option>
+                        <option value="aksesuar">Aksesuar</option>
+                    </select>
+                </div>
+
+            </div>
             <div class="urun-grid">
                 
                 <div class="urun-kart">
@@ -126,7 +159,7 @@
                         </div>
                     </a>
                     <div class="urun-bilgileri">
-                        <p classün-isim">KAPÜŞONLU BASIC S...</p>
+                        <p class="urun-isim">KAPÜŞONLU BASIC S...</p>
                         <div class="urun-meta">
                             <span class="renk-gosterge siyah"></span>
                             <span class="secenek-sayisi">+10</span>

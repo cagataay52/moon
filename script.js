@@ -343,3 +343,92 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// =======================================
+// --- ÜRÜN VERİLERİ (Filtreleme İçin) ---
+// =======================================
+
+// BURADAKİ VERİLER, HTML'DEKİ 8 ÜRÜN KARTINIZLA SIRAYLA EŞLEŞMELİDİR.
+const urunVerileri = [
+    { ad: "SLIM FIT RAHAT P...", fiyat: 1790.00, renk: "siyah", kategori: "pantolon" },
+    { ad: "FERMUARLI İNTE...", fiyat: 1790.00, renk: "siyah", kategori: "ust" },
+    { ad: "DOKULU RAHAT P...", fiyat: 1790.00, renk: "siyah", kategori: "pantolon" },
+    { ad: "GENİŞ PAÇA JOG...", fiyat: 1590.00, renk: "siyah", kategori: "pantolon" },
+    { ad: "POLO YAKA ÇİZGİLİ T...", fiyat: 990.00, renk: "beyaz", kategori: "ust" },
+    { ad: "KAPÜŞONLU BASIC S...", fiyat: 1490.00, renk: "siyah", kategori: "ust" },
+    { ad: "ÖRME KISA KOLLU G...", fiyat: 1290.00, renk: "siyah", kategori: "ust" },
+    { ad: "DÜZ RENK JOGGER P...", fiyat: 1490.00, renk: "beyaz", kategori: "pantolon" },
+];
+
+// =======================================
+// --- FİLTRELEME VE SIRALAMA İŞLEVİ ---
+// =======================================
+
+function filtreleriUygula() {
+    // Sadece projeler.html'de çalışır
+    const konteyner = document.querySelector('.urun-grid');
+    if (!konteyner) return;
+
+    // 1. Filtre değerlerini al
+    const siralamaSecimi = document.getElementById('sirala')?.value || 'default';
+    const renkFiltresi = document.getElementById('renk')?.value || 'all';
+    const kategoriFiltresi = document.getElementById('kategori')?.value || 'all';
+
+    // 2. HTML'deki ürün kartlarını al
+    let kartlar = Array.from(konteyner.querySelectorAll('.urun-kart'));
+
+    // 3. Sıralama İşlemi
+    kartlar.sort((a, b) => {
+        const adA = a.querySelector('.urun-isim').textContent.trim();
+        const adB = b.querySelector('.urun-isim').textContent.trim();
+        // Fiyatları TL ve virgülden temizleyip sayıya çevir (ÖNEMLİ: Kuruş için noktaya çevrilir)
+        const fiyatA = parseFloat(a.querySelector('.fiyat').textContent.replace(' TL', '').replace(',', '.'));
+        const fiyatB = parseFloat(b.querySelector('.fiyat').textContent.replace(' TL', '').replace(',', '.'));
+
+        if (siralamaSecimi === 'fiyat-dusuk') {
+            return fiyatA - fiyatB;
+        } else if (siralamaSecimi === 'fiyat-yuksek') {
+            return fiyatB - fiyatA;
+        } else if (siralamaSecimi === 'ad-a-z') {
+            return adA.localeCompare(adB);
+        }
+        return 0; // Varsayılan sıralama
+    });
+
+    // 4. Filtreleme İşlemi (Görünürlük)
+    kartlar.forEach((kart, index) => {
+        // Kartın veri modeli (index üzerinden eşleştirme)
+        const veri = urunVerileri[index]; 
+        
+        if (!veri) {
+            kart.style.display = 'none'; 
+            return;
+        }
+
+        const renkEslesme = renkFiltresi === 'all' || veri.renk === renkFiltresi;
+        const kategoriEslesme = kategoriFiltresi === 'all' || veri.kategori === kategoriFiltresi;
+
+        if (renkEslesme && kategoriEslesme) {
+            kart.style.display = 'flex'; // Göster
+        } else {
+            kart.style.display = 'none'; // Gizle
+        }
+    });
+
+    // 5. Sıralanmış kartları konteynere geri ekle
+    konteyner.innerHTML = '';
+    kartlar.forEach(kart => konteyner.appendChild(kart));
+}
+
+// Event listener'ları ekle
+document.addEventListener('DOMContentLoaded', () => {
+    // Sadece projeler.html sayfasında event listener'ları ekle
+    if (document.getElementById('filtre-sirala-cubugu')) {
+        document.getElementById('sirala').addEventListener('change', filtreleriUygula);
+        document.getElementById('renk').addEventListener('change', filtreleriUygula);
+        document.getElementById('kategori').addEventListener('change', filtreleriUygula);
+        
+        // Sayfa yüklendiğinde bir kez çalıştır (Sıralama için)
+        filtreleriUygula(); 
+    }
+});
