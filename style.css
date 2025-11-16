@@ -832,3 +832,66 @@ footer, footer nav {
         font-weight: 700;
     }
 }
+
+/* --- SSS SAYFASI VE AKORDEON STİLLERİ --- */
+
+#sss-alani {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: left;
+}
+
+#sss-alani h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2em;
+}
+
+.sss-ogesi {
+    border: 1px solid #EEEEEE;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    overflow: hidden; /* İçerik gizlenmesi için önemli */
+}
+
+.sss-baslik {
+    width: 100%;
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #EEEEEE;
+    position: relative;
+}
+
+.sss-baslik::after {
+    content: '+'; /* Açma/kapama ikonu */
+    position: absolute;
+    right: 20px;
+    font-weight: 700;
+    transition: transform 0.2s;
+}
+
+.sss-ogesi.aktif .sss-baslik::after {
+    content: '-';
+}
+
+.sss-icerik {
+    padding: 0 20px;
+    background-color: #F8F8F8;
+    max-height: 0; /* KRİTİK: Başlangıçta gizli */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.sss-ogesi.aktif .sss-icerik {
+    max-height: 200px; /* Açıkken içeriği göster */
+    padding: 15px 20px;
+}
