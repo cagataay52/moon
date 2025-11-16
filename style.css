@@ -21,9 +21,10 @@ body {
 header {
     /* BURGER İKONU İÇİN KONUMLANDIRMA AYARI */
     display: flex;
-    justify-content: space-between; /* İsim ve Arama kutusunu ayır */
+    justify-content: center; /* İsim ve Navigasyonu ortaya hizala */
+    flex-wrap: wrap; /* Gerekirse alt satıra geçişe izin ver */
     align-items: center;
-    padding: 30px 40px; /* Kenarlara boşluk */
+    padding: 30px 40px; 
     
     font-size: 2em; 
     letter-spacing: 10px; 
@@ -39,9 +40,14 @@ header {
     cursor: pointer;
     position: absolute;
     left: 40px; /* Sol kenardan uzaklık */
+    top: 30px; /* Header'ın üst kısmına hizala */
     z-index: 2000;
     transition: transform 0.2s;
-    display: none; /* KRİTİK: Varsayılan olarak gizli tut, sadece Masaüstü medya sorgusunda açılacak */
+    display: none; /* Varsayılan olarak gizli tut */
+}
+
+#menu-ac-kapa:hover {
+    transform: scale(1.1);
 }
 
 /* --- YENİ YAN MENÜ PANELİ (SIDE NAV) STİLİ --- */
@@ -57,7 +63,7 @@ header {
     z-index: 1500;
     padding: 40px 0;
     transition: left 0.3s ease-in-out;
-    display: none; /* KRİTİK: Varsayılan olarak gizli tut */
+    display: none; /* Varsayılan olarak gizli tut */
 }
 
 /* Menü açıkken pozisyon */
@@ -96,6 +102,11 @@ header {
     color: #000000;
 }
 
+/* --- MASAÜSTÜ NAVİGASYON STİLLERİ (BURGER MENÜSÜ İÇİNDEN ÇIKARILDI) --- */
+
+#desktop-nav {
+    display: none; /* BURGER MENÜSÜ KULLANILDIĞI İÇİN YATAY MENÜYÜ GİZLİYORUZ */
+}
 
 /* --- ARAMA ÇUBUĞU STİLLERİ --- */
 #arama-cubugu {
@@ -194,7 +205,6 @@ main {
 
 /* Tek Bir Ürün Öğesi (4 Sütun için GÜNCEL HESAPLAMA) */
 .urun-kart {
-    /* 4 sütun için boşluk hesaplaması: (100% - (3 * 15px gap)) / 4 = 25% - 11.25px */
     flex: 1 1 calc(25% - 11.25px); 
     max-width: calc(25% - 11.25px); 
     
@@ -253,13 +263,13 @@ footer, footer nav {
 #mobil-nav-cubugu {
     display: none; /* Varsayılan olarak masaüstünde gizli tut */
     
-    position: fixed; /* Ekranın alt kısmına sabitle */
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
     height: 60px; 
     
-    background-color: #000000; /* SİYAH ARKA PLAN */
+    background-color: #000000; 
     border-top: 1px solid #333333;
     z-index: 1000;
     
@@ -272,7 +282,7 @@ footer, footer nav {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: #FFFFFF; /* Beyaz ikon/yazı */
+    color: #FFFFFF;
     font-size: 1.1em;
     flex-grow: 1;
     padding: 0 5px;
